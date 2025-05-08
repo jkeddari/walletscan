@@ -1,0 +1,39 @@
+package web
+
+templ BalanceForm() {
+	@Base() {
+		<form
+			class="flex space-x-2"
+			hx-post="/balance"
+			method="POST"
+			hx-target="#balance-container"
+		>
+			<input
+				class="flex-1 bg-gray-200 text-black p-2 border border-gray-400 rounded-lg"
+				required
+				id="address"
+				name="address"
+				placeholder="Wallet address..."
+				type="text"
+			/>
+			<button
+				type="button"
+				onclick="navigator.clipboard.readText().then(t => document.querySelector('#address').value = t)"
+				class="flex items-center gap-1 bg-gray-200 hover:bg-gray-300 px-3 py-2 rounded-md text-sm"
+			>
+				<img src="assets/icons/paste.svg" alt="Paste" class="h-4 w-4"/>
+			</button>
+			<button
+				type="submit"
+				class="bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 rounded-lg"
+			>Submit</button>
+		</form>
+		<div id="balance-container"></div>
+	}
+}
+
+templ BalancePost(name string) {
+	<div class="bg-green-100 p-4 shadow-md rounded-lg mt-6">
+		<p>{ name } ETH</p>
+	</div>
+}

@@ -1,6 +1,7 @@
-# 🪙 Balancio
+# 🪙 WalletScan
 
-**Balancio** is a lightweight and fast micro-SaaS tool that enables instant balance checks for any cryptocurrency wallet. Whether you're tracking your own holdings or monitoring a whale wallet, **Balancio** offers a clean and minimal interface for quick asset visibility.
+**WalletScan** is a lightweight and fast micro-SaaS tool that enables instant balance checks for any cryptocurrency wallet.
+Whether you're tracking your own holdings or monitoring a whale wallet, **WalletScan** offers a clean and minimal interface for quick asset visibility.
 
 ---
 
