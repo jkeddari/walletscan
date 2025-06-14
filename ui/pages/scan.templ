@@ -72,42 +72,68 @@ templ walletOverview(totalTokens int, totalValue float64, networks []string) {
 templ walletContent(data *types.WalletData) {
 	<div class="rounded-xl overflow-hidden border bg-card">
 		@table.Table() {
-			@table.Header(table.HeaderProps{Class: "hover:bg-transparent"}) {
-				@table.Head(table.HeadProps{Class: "font-semibold w-[50px]"})
-				@table.Head(table.HeadProps{Class: "font-semibold"}) {
-					Asset
-				}
-				@table.Head(table.HeadProps{Class: "font-semibold"}) {
-					Total Amount
-				}
-				@table.Head(table.HeadProps{Class: "font-semibold"}) {
-					Total Value
+			@table.Row(table.RowProps{Class: "hover:bg-transparent"}) {
+				@table.Header(table.HeaderProps{Class: "hover:bg-transparent"}) {
+					@table.Head(table.HeadProps{Class: "font-semibold w-[50px]"})
+					@table.Head(table.HeadProps{Class: "font-semibold"}) {
+						Asset
+					}
+					@table.Head(table.HeadProps{Class: "font-semibold"}) {
+						Total Amount
+					}
+					@table.Head(table.HeadProps{Class: "text-right font-semibold"}) {
+						Total Value
+					}
 				}
 			}
-			@table.Body() {
-				for _, coinBalance := range data.Balances {
-					for _, amount := range coinBalance.Amount {
-						@table.Row(table.RowProps{Class: "hover:bg-muted/50 cursor-pointer"}) {
+			for _, coinBalance := range data.Balances {
+				@table.Body(table.BodyProps{Attributes: templ.Attributes{"x-data": "{open:false}"}}) {
+					@table.Row(table.RowProps{
+						Class: "hover:bg-muted/50 cursor-pointer",
+					}) {
+						@table.Cell() {
+							@button.Button(button.Props{
+								Variant:    button.VariantGhost,
+								Size:       button.SizeIcon,
+								Class:      "h-6 w-6",
+								Attributes: templ.Attributes{"@click": "open = !open"},
+							}) {
+								<span x-show="!open">
+									@icon.ChevronRight(icon.Props{Class: "h-4 w-4"})
+								</span>
+								<span x-show="open">
+									@icon.ChevronDown(icon.Props{Class: "h-4 w-4"})
+								</span>
+							}
+						}
+						@table.Cell(table.CellProps{Class: "font-medium"}) {
+							<div class="flex flex-col">
+								<span>{ strings.ToUpper(coinBalance.Symbol) }</span>
+								<span class="text-xs text-muted-foreground">{ coinBalance.Name }</span>
+							</div>
+						}
+						@table.Cell() {
+							{ FormatNumber(coinBalance.TotalAmount) }
+						}
+						@table.Cell(table.CellProps{Class: "text-right"}) {
+							{ FormatUSD(coinBalance.Value()) }
+						}
+					}
+					for network, amount := range coinBalance.Amount {
+						@table.Row(table.RowProps{
+							Class:      "hover:bg-muted/50 bg-muted/30",
+							Attributes: templ.Attributes{"x-show": "open"},
+						}) {
+							@table.Cell()
+							@table.Cell(table.CellProps{Class: "pl-4"}) {
+								<div class={ "px-3 py-1 rounded-full inline-block " + getNetworkStyle(network) }>
+									{ network }
+								</div>
+							}
 							@table.Cell() {
-								@button.Button(button.Props{
-									Variant: button.VariantGhost,
-									Size:    button.SizeIcon,
-									Class:   "h-6 w-6",
-								}) {
-									if !coinBalance.Expanded {
-										@icon.ChevronRight(icon.Props{Class: "h-4 w-4"})
-									} else {
-										@icon.ChevronDown(icon.Props{Class: "h-4 w-4"})
-									}
-								}
-							}
-							@table.Cell(table.CellProps{Class: "font-medium"}) {
-								{ strings.ToUpper(coinBalance.Symbol) }
-							}
-							@table.Cell(table.CellProps{Class: "font-medium"}) {
 								{ FormatNumber(amount) }
 							}
-							@table.Cell(table.CellProps{Class: "font-medium"}) {
+							@table.Cell(table.CellProps{Class: "text-right"}) {
 								{ FormatUSD(amount * coinBalance.Price) }
 							}
 						}
