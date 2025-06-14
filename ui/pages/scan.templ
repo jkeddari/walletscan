@@ -1,0 +1,129 @@
+package pages
+
+import (
+	"strings"
+
+	"github.com/jkeddari/walletscan/ui/layouts"
+	"github.com/jkeddari/walletscan/ui/components/card"
+	"github.com/jkeddari/walletscan/ui/modules"
+	"github.com/jkeddari/walletscan/ui/components/table"
+	"github.com/jkeddari/walletscan/internal/types"
+	"golang.org/x/text/currency"
+	"golang.org/x/text/language"
+	"golang.org/x/text/message"
+	"github.com/jkeddari/walletscan/ui/components/button"
+	"github.com/jkeddari/walletscan/ui/components/icon"
+)
+
+func FormatUSD(value float64) string {
+	p := message.NewPrinter(language.AmericanEnglish)
+	return p.Sprintf("%v", currency.USD.Amount(value))
+}
+
+func FormatNumber(value float64) string {
+	p := message.NewPrinter(language.AmericanEnglish)
+	return p.Sprintf("%.2f", value)
+}
+
+templ walletOverwiew(totalTokens int, totalValue float64, networks []string) {
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+		@card.Card() {
+			@card.Header() {
+				@card.Title() {
+					Total Value
+				}
+			}
+			@card.Content() {
+				<p className="text-3xl font-bold">{ FormatUSD(totalValue) }</p>
+			}
+		}
+		@card.Card() {
+			@card.Header() {
+				@card.Title() {
+					Networks
+				}
+			}
+			@card.Content() {
+				<div class="flex flex-wrap gap-2">
+					for _, network := range networks {
+						<div
+							key={ network }
+							class={ "px-3 py-1 rounded-full " + getNetworkStyle(network) }
+						>
+							{ network }
+						</div>
+					}
+				</div>
+			}
+		}
+		@card.Card() {
+			@card.Header() {
+				@card.Title() {
+					Total Tokens
+				}
+			}
+			@card.Content() {
+				<p class="text-3xl font-bold">{ totalTokens }</p>
+			}
+		}
+	</div>
+}
+
+templ walletContent(data *types.WalletData) {
+	<div class="rounded-xl overflow-hidden border bg-card">
+		@table.Table() {
+			@table.Header(table.HeaderProps{Class: "hover:bg-transparent"}) {
+				@table.Head(table.HeadProps{Class: "font-semibold w-[50px]"})
+				@table.Head(table.HeadProps{Class: "font-semibold"}) {
+					Asset
+				}
+				@table.Head(table.HeadProps{Class: "font-semibold"}) {
+					Total Amount
+				}
+				@table.Head(table.HeadProps{Class: "font-semibold"}) {
+					Total Value
+				}
+			}
+			@table.Body() {
+				for _, coinBalance := range data.Balances {
+					for _, amount := range coinBalance.Amount {
+						@table.Row(table.RowProps{Class: "hover:bg-muted/50 cursor-pointer"}) {
+							@table.Cell() {
+								@button.Button(button.Props{
+									Variant: button.VariantGhost,
+									Size:    button.SizeIcon,
+									Class:   "h-6 w-6",
+								}) {
+									if !coinBalance.Expanded {
+										@icon.ChevronRight(icon.Props{Class: "h-4 w-4"})
+									} else {
+										@icon.ChevronDown(icon.Props{Class: "h-4 w-4"})
+									}
+								}
+							}
+							@table.Cell(table.CellProps{Class: "font-medium"}) {
+								{ strings.ToUpper(coinBalance.Symbol) }
+							}
+							@table.Cell(table.CellProps{Class: "font-medium"}) {
+								{ FormatNumber(amount) }
+							}
+							@table.Cell(table.CellProps{Class: "font-medium"}) {
+								{ FormatUSD(amount * coinBalance.Price) }
+							}
+						}
+					}
+				}
+			}
+		}
+	</div>
+}
+
+templ Scan(address string, data *types.WalletData) {
+	@layouts.BaseLayout() {
+		<main class="flex-1 container max-w-7xl mx-auto py-6 space-y-8">
+			@modules.ScanForm(address)
+			@walletOverwiew(len(data.Balances), data.TotalValue, data.Networks())
+			@walletContent(data)
+		</main>
+	}
+}

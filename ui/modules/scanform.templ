@@ -1,0 +1,40 @@
+package modules
+
+import (
+	"github.com/jkeddari/walletscan/ui/components/input"
+	"github.com/jkeddari/walletscan/ui/components/button"
+	"github.com/jkeddari/walletscan/ui/components/spinner"
+)
+
+templ ScanForm(address string) {
+	<form
+		class="mt-8"
+		hx-post="/scan-address"
+		hx-trigger="submit"
+		hx-indicator="#spinner"
+		hx-disabled-elt="find button"
+	>
+		<div class="flex gap-3">
+			@input.Input(input.Props{
+				Type:        input.TypeText,
+				Name:        "address",
+				Placeholder: "Enter wallet address",
+				Class:       "flex-1",
+				Value:       address,
+				Required:    true,
+			})
+			@button.Button(button.Props{
+				Type:  button.TypeSubmit,
+				Class: "flex items-center gap-2",
+			}) {
+				<span id="spinner" class="htmx-indicator hidden [&.htmx-request]:inline-flex">
+					@spinner.Spinner(spinner.Props{
+						Size:  spinner.SizeSm,
+						Color: "text-primary-foreground",
+					})
+				</span>
+				Scan
+			}
+		</div>
+	</form>
+}

@@ -1,0 +1,6 @@
+{
+  "componentsDir": "ui/components",
+  "utilsDir": "utils",
+  "moduleName": "github.com/jkeddari/walletscan",
+  "jsDir": "assets/js/components"
+}
