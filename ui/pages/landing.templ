@@ -1,0 +1,24 @@
+package pages
+
+import (
+	"github.com/jkeddari/walletscan/ui/layouts"
+	"github.com/jkeddari/walletscan/ui/modules"
+)
+
+templ Landing() {
+	@layouts.BaseLayout() {
+		<main class="flex-1 flex items-center justify-center">
+			<div class="w-full max-w-xl px-4">
+				<div class="text-center">
+					<h1 class="text-5xl font-bold tracking-tight">
+						WalletScan
+					</h1>
+					<p class="mt-4 text-lg text-gray-600">
+						Enter an address to scan and analyze wallet details
+					</p>
+				</div>
+				@modules.ScanForm("")
+			</div>
+		</main>
+	}
+}

@@ -4,54 +4,107 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"log/slog"
 	"net/http"
-	"os/signal"
-	"syscall"
-	"time"
+	"os"
 
-	"github.com/jkeddari/walletscan/internal/server"
+	"github.com/a-h/templ"
+	"github.com/jkeddari/walletscan"
+	"github.com/jkeddari/walletscan/internal/gecko"
+	"github.com/jkeddari/walletscan/ui/pages"
+	"github.com/joho/godotenv"
 )
 
-func gracefulShutdown(apiServer *http.Server, done chan bool) {
-	// Create context that listens for the interrupt signal from the OS.
-	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
-	defer stop()
+const defaultPort = "8090"
 
-	// Listen for the interrupt signal.
-	<-ctx.Done()
+var (
+	coinsInfo       *gecko.CoinsDetails
+	coinGeckoAPIKey string
+	logger          = slog.Default()
+)
 
-	log.Println("shutting down gracefully, press Ctrl+C again to force")
-	stop() // Allow Ctrl+C to force shutdown
-
-	// The context is used to inform the server it has 5 seconds to finish
-	// the request it is currently handling
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	if err := apiServer.Shutdown(ctx); err != nil {
-		log.Printf("Server forced to shutdown with error: %v", err)
+func init() {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("Error loading .env file")
 	}
 
-	log.Println("Server exiting")
+	coinGeckoAPIKey = os.Getenv("COINGECKO_APIKEY")
+	if coinGeckoAPIKey == "" {
+		log.Fatal("missing coingecko api key")
+	}
 
-	// Notify the main goroutine that the shutdown is complete
-	done <- true
+	coinsInfo, err = gecko.ReadCoinsDetails("./coinlist.json")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func main() {
-	server := server.NewServer()
-
-	// Create a done channel to signal when the shutdown is complete
-	done := make(chan bool, 1)
-
-	// Run graceful shutdown in a separate goroutine
-	go gracefulShutdown(server, done)
-
-	err := server.ListenAndServe()
-	if err != nil && err != http.ErrServerClosed {
-		panic(fmt.Sprintf("http server error: %s", err))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = defaultPort
 	}
 
-	// Wait for the graceful shutdown to complete
-	<-done
-	log.Println("Graceful shutdown complete.")
+	mux := http.NewServeMux()
+	setupAssetsRoutes(mux)
+	mux.Handle("GET /", templ.Handler(pages.Landing()))
+	mux.Handle("GET /about", templ.Handler(pages.About()))
+	mux.HandleFunc("POST /scan-address", func(w http.ResponseWriter, r *http.Request) {
+		address := r.FormValue("address")
+		if address == "" {
+			http.Error(w, "Address required", http.StatusBadRequest)
+			return
+		}
+
+		// HTMX redirection
+		w.Header().Set("HX-Redirect", "/scan/"+address)
+		w.WriteHeader(http.StatusOK)
+	})
+
+	mux.HandleFunc("GET /scan/{address}", func(w http.ResponseWriter, r *http.Request) {
+		address := r.PathValue("address")
+		if address == "" {
+			http.Error(w, "Address required", http.StatusBadRequest)
+			return
+		}
+
+		prices, err := gecko.PricesByIDs(coinGeckoAPIKey, coinsInfo.IDs...)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+
+		data, err := walletscan.Scan(address, coinsInfo, prices)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+
+		pages.Scan(address, data).Render(context.Background(), w)
+	})
+
+	logger.Info("Server is running", "port", port, "coins", len(coinsInfo.IDs))
+	http.ListenAndServe(":"+port, mux)
+}
+
+func setupAssetsRoutes(mux *http.ServeMux) {
+	// isDevelopment := os.Getenv("GO_ENV") != "production"
+
+	assetHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// if isDevelopment {
+		// 	w.Header().Set("Cache-Control", "no-store")
+		// }
+
+		var fs http.Handler
+		// if isDevelopment {
+		fs = http.FileServer(http.Dir("./assets"))
+		// } else {
+		// 	fs = http.FileServer(http.FS(assets.Assets))
+		// }
+
+		fs.ServeHTTP(w, r)
+	})
+
+	mux.Handle("GET /assets/", http.StripPrefix("/assets/", assetHandler))
 }

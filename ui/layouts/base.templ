@@ -1,0 +1,53 @@
+package layouts
+
+import (
+	"github.com/jkeddari/walletscan/ui/modules"
+	"github.com/jkeddari/walletscan/ui/components/input"
+)
+
+templ ThemeSwitcherScript() {
+	{{ handle := templ.NewOnceHandle() }}
+	@handle.Once() {
+		<script nonce={ templ.GetNonce(ctx) }>
+			// Initial theme setup
+			document.documentElement.classList.toggle('dark', localStorage.getItem('appTheme') === 'dark');
+
+			document.addEventListener('alpine:init', () => {
+				Alpine.data('themeHandler', () => ({
+					isDark: localStorage.getItem('appTheme') === 'dark',
+					themeClasses() {
+						return this.isDark ? 'text-white' : 'bg-white text-black'
+					},
+					toggleTheme() {
+						this.isDark = !this.isDark;
+						localStorage.setItem('appTheme', this.isDark ? 'dark' : 'light');
+						document.documentElement.classList.toggle('dark', this.isDark);
+					}
+				}))
+			})
+		</script>
+	}
+}
+
+templ BaseLayout() {
+	<!DOCTYPE html>
+	<html lang="en" class="h-full dark">
+		<head>
+			<title>WalletScan</title>
+			@input.Script()
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link href="/assets/css/output.css" rel="stylesheet"/>
+			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+			<script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+			@ThemeSwitcherScript()
+		</head>
+		<body class="antialiased min-h-screen flex flex-col" x-data="themeHandler" x-bind:class="themeClasses">
+			<div class="flex min-h-screen flex-col">
+				@modules.Header()
+				{ children... }
+				@modules.Footer()
+			</div>
+		</body>
+	</html>
+}

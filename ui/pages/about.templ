@@ -1,0 +1,102 @@
+package pages
+
+import (
+	"github.com/jkeddari/walletscan/ui/layouts"
+	"github.com/jkeddari/walletscan/ui/components/card"
+)
+
+var networksStyleList = map[string]string{
+	"bitcoin":   "bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-100",
+	"solana":    "bg-purple-100 dark:bg-emerald-900 text-purple-800 dark:text-emerald-100",
+	"ethereum":  "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100",
+	"bsc":       "bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-100",
+	"polygon":   "bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100",
+	"base":      "bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-100",
+	"avalanche": "bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-100",
+	"arbitrum":  "bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-100",
+}
+
+func getNetworkStyle(network string) string {
+	if style, ok := networksStyleList[network]; ok {
+		return style
+	}
+
+	return "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+}
+
+templ About() {
+	@layouts.BaseLayout() {
+		<main class="flex-1 container max-w-7xl mx-auto py-6 space-y-8">
+			<div class="text-center space-y-4">
+				<h1 class="text-4xl font-bold">About WalletScan</h1>
+				<p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+					A powerful tool to scan and analyze any blockchain wallet address, providing detailed insights about token holdings across multiple networks.
+				</p>
+			</div>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+				@card.Card() {
+					@card.Header() {
+						@card.Title() {
+							Our Mission
+						}
+					}
+					@card.Content(card.ContentProps{
+						Class: "space-y-4",
+					}) {
+						<p>
+							WalletScan is designed to make blockchain wallet analysis accessible to everyone. 
+							Whether you're a crypto enthusiast, investor, or developer, our tool helps you:
+						</p>
+						<ul class="list-disc list-inside space-y-2">
+							<li>Scan any wallet address across multiple blockchains</li>
+							<li>View token balances and their current values</li>
+							<li>Track holdings across different networks</li>
+							<li>Get a comprehensive overview of your portfolio</li>
+						</ul>
+						<p>
+							Currently, we support the top 100 tokens across all major networks, 
+							with plans to expand our coverage in the future.
+						</p>
+					}
+				}
+				@card.Card() {
+					@card.Header() {
+						@card.Title() {
+							Supported Networks
+						}
+					}
+					@card.Content(card.ContentProps{
+						Class: "flex flex-wrap gap-2",
+					}) {
+						<div class="flex flex-wrap gap-2">
+							for network, style := range networksStyleList {
+								<div class={ "px-3 py-1 rounded-full " + style }>{ network }</div>
+							}
+						</div>
+					}
+				}
+			</div>
+			// <div class="flex justify-center">
+			// 	<div class="w-full md:w-2/3 lg:w-1/2">
+			// 		@card.Card() {
+			// 			@card.Header() {
+			// 				@card.Title() {
+			// 					Get Involved
+			// 				}
+			// 			}
+			// 			@card.Content(card.ContentProps{
+			// 				Class: "space-y-4",
+			// 			}) {
+			// 				<p>
+			// 					WalletScan is open to community feedback and contributions. Join our Discord, follow us on Twitter, or contribute to the GitHub repo to help shape the future of wallet analytics.
+			// 				</p>
+			// 				<p>
+			// 					Together, we can make blockchain transparency even more powerful.
+			// 				</p>
+			// 			}
+			// 		}
+			// 	</div>
+			// </div>
+		</main>
+	}
+}
