@@ -67,7 +67,7 @@ func (b *Balance) add(network string, amount float64) {
 	}
 
 	b.Amount[network] = amount
-	b.TotalAmount = amount
+	b.TotalAmount += amount
 }
 
 func (b *Balance) Value() float64 {
