@@ -25,7 +25,7 @@ func FormatNumber(value float64) string {
 	return p.Sprintf("%.2f", value)
 }
 
-templ walletOverwiew(totalTokens int, totalValue float64, networks []string) {
+templ walletOverview(totalTokens int, totalValue float64, networks []string) {
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 		@card.Card() {
 			@card.Header() {
@@ -34,7 +34,7 @@ templ walletOverwiew(totalTokens int, totalValue float64, networks []string) {
 				}
 			}
 			@card.Content() {
-				<p className="text-3xl font-bold">{ FormatUSD(totalValue) }</p>
+				<p class="text-3xl font-bold">{ FormatUSD(totalValue) }</p>
 			}
 		}
 		@card.Card() {
@@ -122,7 +122,7 @@ templ Scan(address string, data *types.WalletData) {
 	@layouts.BaseLayout() {
 		<main class="flex-1 container max-w-7xl mx-auto py-6 space-y-8">
 			@modules.ScanForm(address)
-			@walletOverwiew(len(data.Balances), data.TotalValue, data.Networks())
+			@walletOverview(len(data.Balances), data.TotalValue, data.Networks())
 			@walletContent(data)
 		</main>
 	}

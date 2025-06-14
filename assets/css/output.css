@@ -926,7 +926,7 @@
   .hover\:text-accent-foreground {
     &:hover {
       @media (hover: hover) {
-        color: var(---accent-foreground);
+        color: var(--accent-foreground);
       }
     }
   }

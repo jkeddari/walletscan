@@ -73,7 +73,7 @@ var networks = []*networkInfo{
 		SymbolID: "ethereum",
 	},
 	{
-		Network:  "optimisum",
+		Network:  "optimism",
 		URL:      "https://optimism-rpc.publicnode.com",
 		SymbolID: "ethereum",
 	},
