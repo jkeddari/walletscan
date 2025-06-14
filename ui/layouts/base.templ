@@ -33,16 +33,38 @@ templ BaseLayout() {
 	<!DOCTYPE html>
 	<html lang="en" class="h-full dark">
 		<head>
-			<title>WalletScan</title>
+			<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+				new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+				'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+				})(window,document,'script','dataLayer','GTM-MR3CWDQ7');
+			</script>
 			@input.Script()
+			@ThemeSwitcherScript()
+			<title>WalletScan</title>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<link href="/assets/css/output.css" rel="stylesheet"/>
 			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 			<script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
-			@ThemeSwitcherScript()
+			<script async src="https://www.googletagmanager.com/gtag/js?id=G-DHT46C8XLJ"></script>
+			<script>
+			  window.dataLayer = window.dataLayer || [];
+			  function gtag(){dataLayer.push(arguments);}
+			  gtag('js', new Date());
+
+			  gtag('config', 'G-DHT46C8XLJ');
+			</script>
 		</head>
 		<body class="antialiased min-h-screen flex flex-col" x-data="themeHandler" x-bind:class="themeClasses">
+			<noscript>
+				<iframe
+					src="https://www.googletagmanager.com/ns.html?id=GTM-MR3CWDQ7"
+					height="0"
+					width="0"
+					style="display:none;visibility:hidden"
+				></iframe>
+			</noscript>
 			<div class="flex min-h-screen flex-col">
 				@modules.Header()
 				{ children... }
