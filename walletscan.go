@@ -14,8 +14,6 @@ import (
 
 //go:generate go tool templ generate
 
-// TODO: remove apiKey in code
-
 var (
 	Logger           = slog.Default()
 	COINGECKO_APIKEY string

@@ -2,6 +2,7 @@ package types
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 	"sync"
 )
@@ -105,6 +106,41 @@ func (w *WalletData) Networks() []string {
 		networks = append(networks, n)
 	}
 	return networks
+}
+
+// SortedBalances returns balances sorted according to key.
+// Valid sortKey values: "symbol", "amount", "value".
+// Ascending order is used when asc is true.
+func (w *WalletData) SortedBalances(sortKey string, asc bool) []*Balance {
+	balances := make([]*Balance, 0, len(w.Balances))
+	for _, b := range w.Balances {
+		balances = append(balances, b)
+	}
+
+	less := func(i, j int) bool { return false }
+	switch sortKey {
+	case "amount":
+		if asc {
+			less = func(i, j int) bool { return balances[i].TotalAmount < balances[j].TotalAmount }
+		} else {
+			less = func(i, j int) bool { return balances[i].TotalAmount > balances[j].TotalAmount }
+		}
+	case "symbol":
+		if asc {
+			less = func(i, j int) bool { return balances[i].Symbol < balances[j].Symbol }
+		} else {
+			less = func(i, j int) bool { return balances[i].Symbol > balances[j].Symbol }
+		}
+	default:
+		if asc {
+			less = func(i, j int) bool { return balances[i].Value() < balances[j].Value() }
+		} else {
+			less = func(i, j int) bool { return balances[i].Value() > balances[j].Value() }
+		}
+	}
+
+	sort.Slice(balances, less)
+	return balances
 }
 
 func (w *WalletData) Add(id, network, symbol, name string, amount, price float64) {

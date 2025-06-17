@@ -11,6 +11,8 @@ import (
 	"github.com/a-h/templ"
 	"github.com/jkeddari/walletscan"
 	"github.com/jkeddari/walletscan/internal/gecko"
+	"github.com/jkeddari/walletscan/internal/types"
+	"github.com/jkeddari/walletscan/ui/modules"
 	"github.com/jkeddari/walletscan/ui/pages"
 	"github.com/joho/godotenv"
 )
@@ -57,6 +59,13 @@ func main() {
 			return
 		}
 
+		if walletscan.IsAddress(address) == types.UnknownAddress {
+			logger.Info("bad address", "address", address)
+			w.WriteHeader(http.StatusOK)
+			modules.ScanForm(address, true).Render(r.Context(), w)
+			return
+		}
+
 		// HTMX redirection
 		w.Header().Set("HX-Redirect", "/scan/"+address)
 		w.WriteHeader(http.StatusOK)
@@ -75,13 +84,20 @@ func main() {
 			return
 		}
 
+		sortKey := r.URL.Query().Get("sort")
+		if sortKey == "" {
+			sortKey = "symbol"
+		}
+		order := r.URL.Query().Get("order")
+		asc := order != "desc"
+
 		data, err := walletscan.Scan(address, coinsInfo, prices)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
-		pages.Scan(address, data).Render(context.Background(), w)
+		pages.Scan(address, data, sortKey, asc).Render(context.Background(), w)
 	})
 
 	logger.Info("Server is running", "port", port, "coins", len(coinsInfo.IDs))
@@ -89,20 +105,9 @@ func main() {
 }
 
 func setupAssetsRoutes(mux *http.ServeMux) {
-	// isDevelopment := os.Getenv("GO_ENV") != "production"
-
 	assetHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// if isDevelopment {
-		// 	w.Header().Set("Cache-Control", "no-store")
-		// }
-
 		var fs http.Handler
-		// if isDevelopment {
 		fs = http.FileServer(http.Dir("./assets"))
-		// } else {
-		// 	fs = http.FileServer(http.FS(assets.Assets))
-		// }
-
 		fs.ServeHTTP(w, r)
 	})
 
