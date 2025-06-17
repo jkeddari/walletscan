@@ -9,11 +9,13 @@ import (
 
 type AddressType int
 
+//go:generate go tool stringer -type=AddressType -linecomment
+
 const (
-	UnknownAddress = iota
-	EVMAddress
-	BitcoinAddress
-	SolanaAddress
+	UnknownAddress AddressType = iota // unknown
+	EVMAddress                        // evm
+	BitcoinAddress                    // bitcoin
+	SolanaAddress                     // solana
 )
 
 // Balance defines a total balance for a token ID.
