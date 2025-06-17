@@ -388,6 +388,9 @@
   .animate-spin {
     animation: var(--animate-spin);
   }
+  .cursor-not-allowed {
+    cursor: not-allowed;
+  }
   .cursor-pointer {
     cursor: pointer;
   }
@@ -468,6 +471,13 @@
       --tw-space-y-reverse: 0;
       margin-block-start: calc(calc(var(--spacing) * 8) * var(--tw-space-y-reverse));
       margin-block-end: calc(calc(var(--spacing) * 8) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-x-2 {
+    :where(& > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(calc(var(--spacing) * 2) * var(--tw-space-x-reverse));
+      margin-inline-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
   .divide-y {
@@ -727,6 +737,9 @@
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
   }
+  .text-\[0\.8rem\] {
+    font-size: 0.8rem;
+  }
   .leading-none {
     --tw-leading: 1;
     line-height: 1;
@@ -757,6 +770,9 @@
   .text-black {
     color: var(--color-black);
   }
+  .text-blue-500 {
+    color: var(--color-blue-500);
+  }
   .text-blue-800 {
     color: var(--color-blue-800);
   }
@@ -765,6 +781,9 @@
   }
   .text-cyan-800 {
     color: var(--color-cyan-800);
+  }
+  .text-destructive {
+    color: var(--destructive);
   }
   .text-destructive-foreground {
     color: var(--destructive-foreground);
@@ -792,6 +811,9 @@
   }
   .text-purple-800 {
     color: var(--color-purple-800);
+  }
+  .text-red-500 {
+    color: var(--color-red-500);
   }
   .text-secondary-foreground {
     color: var(--secondary-foreground);
@@ -1255,6 +1277,11 @@
   inherits: false;
   initial-value: 0;
 }
+@property --tw-space-x-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
 @property --tw-divide-y-reverse {
   syntax: "*";
   inherits: false;
@@ -1404,6 +1431,7 @@
       --tw-scale-y: 1;
       --tw-scale-z: 1;
       --tw-space-y-reverse: 0;
+      --tw-space-x-reverse: 0;
       --tw-divide-y-reverse: 0;
       --tw-border-style: solid;
       --tw-gradient-position: initial;

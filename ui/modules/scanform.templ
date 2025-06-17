@@ -4,25 +4,42 @@ import (
 	"github.com/jkeddari/walletscan/ui/components/input"
 	"github.com/jkeddari/walletscan/ui/components/button"
 	"github.com/jkeddari/walletscan/ui/components/spinner"
+	"github.com/jkeddari/walletscan/ui/components/form"
 )
 
-templ ScanForm(address string) {
+templ ScanForm(address string, showError bool) {
 	<form
-		class="mt-8"
 		hx-post="/scan-address"
 		hx-trigger="submit"
+		hx-swap="outerHTML"
+		hx-target="this"
 		hx-indicator="#spinner"
 		hx-disabled-elt="find button"
+		class="mt-8 "
 	>
-		<div class="flex gap-3">
-			@input.Input(input.Props{
-				Type:        input.TypeText,
-				Name:        "address",
-				Placeholder: "Enter wallet address",
-				Class:       "flex-1",
-				Value:       address,
-				Required:    true,
-			})
+		@form.Item(form.ItemProps{
+			Class: "flex-1 flex gap-3",
+		}) {
+			<div class="flex-1">
+				@input.Input(input.Props{
+					Class:       "flex",
+					Type:        input.TypeText,
+					Name:        "address",
+					Placeholder: "Enter wallet address",
+					Value:       address,
+					Required:    true,
+					HasError:    showError,
+				})
+				if showError {
+					@form.Message(form.MessageProps{
+						Class:      "flex",
+						Attributes: templ.Attributes{"hx-on:htmx:responseError": "open = !open"},
+						Variant:    form.MessageVariantError,
+					}) {
+						Invalid wallet address. Please check and try again.
+					}
+				}
+			</div>
 			@button.Button(button.Props{
 				Type:  button.TypeSubmit,
 				Class: "flex items-center gap-2",
@@ -35,6 +52,6 @@ templ ScanForm(address string) {
 				</span>
 				Scan
 			}
-		</div>
+		}
 	</form>
 }

@@ -86,7 +86,7 @@ templ walletContent(data *types.WalletData) {
 					}
 				}
 			}
-			for _, coinBalance := range data.Balances {
+			for _, coinBalance := range data.SortedBalances("value", false) {
 				@table.Body(table.BodyProps{Attributes: templ.Attributes{"x-data": "{open:false}"}}) {
 					@table.Row(table.RowProps{
 						Class: "hover:bg-muted/50 cursor-pointer",
@@ -144,10 +144,10 @@ templ walletContent(data *types.WalletData) {
 	</div>
 }
 
-templ Scan(address string, data *types.WalletData) {
+templ Scan(address string, data *types.WalletData, sortKey string, sortAsc bool) {
 	@layouts.BaseLayout() {
 		<main class="flex-1 container max-w-7xl mx-auto py-6 space-y-8">
-			@modules.ScanForm(address)
+			@modules.ScanForm(address, false)
 			@walletOverview(len(data.Balances), data.TotalValue, data.Networks())
 			@walletContent(data)
 		</main>
