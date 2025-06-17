@@ -17,12 +17,14 @@ import (
 	"github.com/joho/godotenv"
 )
 
-const defaultPort = "8090"
+const (
+	defaultPort = "8090"
+)
 
 var (
 	coinsInfo       *gecko.CoinsDetails
 	coinGeckoAPIKey string
-	logger          = slog.Default()
+	logger          = slog.New(slog.NewJSONHandler(os.Stdout, nil))
 )
 
 func init() {
@@ -50,7 +52,11 @@ func main() {
 
 	mux := http.NewServeMux()
 	setupAssetsRoutes(mux)
-	mux.Handle("GET /", templ.Handler(pages.Landing()))
+	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+		logger.Info("landing_page")
+		pages.Landing().Render(context.Background(), w)
+	})
+
 	mux.Handle("GET /about", templ.Handler(pages.About()))
 	mux.HandleFunc("POST /scan-address", func(w http.ResponseWriter, r *http.Request) {
 		address := r.FormValue("address")
@@ -97,6 +103,7 @@ func main() {
 			return
 		}
 
+		logger.Info("scan_address", "type", walletscan.IsAddress(address).String())
 		pages.Scan(address, data, sortKey, asc).Render(context.Background(), w)
 	})
 
