@@ -88,7 +88,7 @@ type WalletData struct {
 	// Balance defines balance by token ID.
 	Balances map[string]*Balance
 
-	m sync.Mutex
+	m sync.RWMutex
 }
 
 func NewWalletData() *WalletData {
@@ -99,10 +99,14 @@ func NewWalletData() *WalletData {
 }
 
 func (w *WalletData) TokenNumber() int {
+	w.m.RLock()
+	defer w.m.RUnlock()
 	return len(w.Balances)
 }
 
 func (w *WalletData) Networks() []string {
+	w.m.RLock()
+	defer w.m.RUnlock()
 	var networks []string
 	for n := range w.Network {
 		networks = append(networks, n)
@@ -114,6 +118,8 @@ func (w *WalletData) Networks() []string {
 // Valid sortKey values: "symbol", "amount", "value".
 // Ascending order is used when asc is true.
 func (w *WalletData) SortedBalances(sortKey string, asc bool) []*Balance {
+	w.m.RLock()
+	defer w.m.RUnlock()
 	balances := make([]*Balance, 0, len(w.Balances))
 	for _, b := range w.Balances {
 		balances = append(balances, b)
@@ -165,8 +171,8 @@ func (w *WalletData) Add(id, network, symbol, name string, amount, price float64
 }
 
 func (w *WalletData) Print() {
-	w.m.Lock()
-	defer w.m.Unlock()
+	w.m.RLock()
+	defer w.m.RUnlock()
 
 	fmt.Println("======= Wallet Data =======")
 	fmt.Printf("Total Value: $%.2f\n", w.TotalValue)
