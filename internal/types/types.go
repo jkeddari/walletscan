@@ -16,6 +16,7 @@ const (
 	EVMAddress                        // evm
 	BitcoinAddress                    // bitcoin
 	SolanaAddress                     // solana
+	TronAddress                       // tron
 )
 
 // Balance defines a total balance for a token ID.
@@ -152,7 +153,7 @@ func (w *WalletData) SortedBalances(sortKey string, asc bool) []*Balance {
 }
 
 func (w *WalletData) Add(id, network, symbol, name string, amount, price float64) {
-	if amount == 0 {
+	if amount == 0 || amount*price < 0.1 {
 		return
 	}
 

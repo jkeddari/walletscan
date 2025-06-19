@@ -9,6 +9,7 @@ import (
 	"github.com/jkeddari/walletscan/internal/evmscan"
 	"github.com/jkeddari/walletscan/internal/gecko"
 	"github.com/jkeddari/walletscan/internal/solana"
+	"github.com/jkeddari/walletscan/internal/tronscan"
 	"github.com/jkeddari/walletscan/internal/types"
 )
 
@@ -27,6 +28,8 @@ func Scan(address string, coinsDetails *gecko.CoinsDetails, prices gecko.Prices)
 		return bitcoin.Scan(address, prices.PriceByID("bitcoin"))
 	case types.SolanaAddress:
 		return solana.Scan(address, coinsDetails, prices)
+	case types.TronAddress:
+		return tronscan.Scan(address)
 	}
 	return nil, errors.New("bad address")
 }
@@ -39,6 +42,8 @@ func IsAddress(address string) types.AddressType {
 		return types.BitcoinAddress
 	case solana.ValidAddress(address):
 		return types.SolanaAddress
+	case tronscan.ValidAddress(address):
+		return types.TronAddress
 	default:
 		return types.UnknownAddress
 	}
