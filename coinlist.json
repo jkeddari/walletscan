@@ -2,6 +2,7 @@
   "aave": {
     "name": "Aave",
     "symbol": "aave",
+    "icon": "https://coin-images.coingecko.com/coins/images/12645/small/aave-token-round.png?1720472354",
     "detail_platforms": {
       "arbitrum-one": {
         "decimal_place": 18,
@@ -39,6 +40,10 @@
         "decimal_place": 18,
         "contract_address": "0x202b4936fe1a82a4965220860ae46d7d3939bb25"
       },
+      "hydration": {
+        "decimal_place": 18,
+        "contract_address": "asset_registry%2F1000624"
+      },
       "near-protocol": {
         "decimal_place": 18,
         "contract_address": "7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9.factory.bridge.near"
@@ -60,6 +65,7 @@
   "algorand": {
     "name": "Algorand",
     "symbol": "algo",
+    "icon": "https://coin-images.coingecko.com/coins/images/4380/small/download.png?1696504978",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -70,6 +76,7 @@
   "aptos": {
     "name": "Aptos",
     "symbol": "apt",
+    "icon": "https://coin-images.coingecko.com/coins/images/26455/small/aptos_round.png?1696525528",
     "detail_platforms": {
       "aptos": {
         "decimal_place": 8,
@@ -80,6 +87,7 @@
   "arbitrum": {
     "name": "Arbitrum",
     "symbol": "arb",
+    "icon": "https://coin-images.coingecko.com/coins/images/16547/small/arb.jpg?1721358242",
     "detail_platforms": {
       "arbitrum-nova": {
         "decimal_place": 18,
@@ -98,6 +106,7 @@
   "avalanche-2": {
     "name": "Avalanche",
     "symbol": "avax",
+    "icon": "https://coin-images.coingecko.com/coins/images/12559/small/Avalanche_Circle_RedWhite_Trans.png?1696512369",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -105,9 +114,21 @@
       }
     }
   },
+  "binance-bridged-usdc-bnb-smart-chain": {
+    "name": "Binance Bridged USDC (BNB Smart Chain)",
+    "symbol": "usdc",
+    "icon": "https://coin-images.coingecko.com/coins/images/35220/small/USDC.jpg?1707919050",
+    "detail_platforms": {
+      "binance-smart-chain": {
+        "decimal_place": 18,
+        "contract_address": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d"
+      }
+    }
+  },
   "binance-bridged-usdt-bnb-smart-chain": {
     "name": "Binance Bridged USDT (BNB Smart Chain)",
     "symbol": "bsc-usd",
+    "icon": "https://coin-images.coingecko.com/coins/images/35021/small/USDT.png?1707233575",
     "detail_platforms": {
       "binance-smart-chain": {
         "decimal_place": 18,
@@ -118,6 +139,7 @@
   "binance-peg-weth": {
     "name": "Binance-Peg WETH",
     "symbol": "weth",
+    "icon": "https://coin-images.coingecko.com/coins/images/39580/small/weth.png?1723006716",
     "detail_platforms": {
       "binance-smart-chain": {
         "decimal_place": 18,
@@ -128,6 +150,7 @@
   "binance-staked-sol": {
     "name": "Binance Staked SOL",
     "symbol": "bnsol",
+    "icon": "https://coin-images.coingecko.com/coins/images/40132/small/bnsol.png?1725968367",
     "detail_platforms": {
       "solana": {
         "decimal_place": 9,
@@ -138,6 +161,7 @@
   "binancecoin": {
     "name": "BNB",
     "symbol": "bnb",
+    "icon": "https://coin-images.coingecko.com/coins/images/825/small/bnb-icon2_2x.png?1696501970",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -152,6 +176,7 @@
   "bitcoin": {
     "name": "Bitcoin",
     "symbol": "btc",
+    "icon": "https://coin-images.coingecko.com/coins/images/1/small/bitcoin.png?1696501400",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -162,6 +187,7 @@
   "bitcoin-cash": {
     "name": "Bitcoin Cash",
     "symbol": "bch",
+    "icon": "https://coin-images.coingecko.com/coins/images/780/small/bitcoin-cash-circle.png?1696501932",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -172,6 +198,7 @@
   "bitget-token": {
     "name": "Bitget Token",
     "symbol": "bgb",
+    "icon": "https://coin-images.coingecko.com/coins/images/11610/small/Bitget_logo.png?1736925727",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -186,6 +213,7 @@
   "bittensor": {
     "name": "Bittensor",
     "symbol": "tao",
+    "icon": "https://coin-images.coingecko.com/coins/images/28452/small/ARUsPeNQ_400x400.jpeg?1696527447",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -196,6 +224,7 @@
   "blackrock-usd-institutional-digital-liquidity-fund": {
     "name": "BlackRock USD Institutional Digital Liquidity Fund",
     "symbol": "buidl",
+    "icon": "https://coin-images.coingecko.com/coins/images/36291/small/blackrock.png?1711013223",
     "detail_platforms": {
       "aptos": {
         "decimal_place": 6,
@@ -230,6 +259,7 @@
   "blockstack": {
     "name": "Stacks",
     "symbol": "stx",
+    "icon": "https://coin-images.coingecko.com/coins/images/2069/small/Stacks_Logo_png.png?1709979332",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -240,6 +270,7 @@
   "bonk": {
     "name": "Bonk",
     "symbol": "bonk",
+    "icon": "https://coin-images.coingecko.com/coins/images/28600/small/bonk.jpg?1696527587",
     "detail_platforms": {
       "aptos": {
         "decimal_place": 5,
@@ -274,6 +305,7 @@
   "cardano": {
     "name": "Cardano",
     "symbol": "ada",
+    "icon": "https://coin-images.coingecko.com/coins/images/975/small/cardano.png?1696502090",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -284,6 +316,7 @@
   "celestia": {
     "name": "Celestia",
     "symbol": "tia",
+    "icon": "https://coin-images.coingecko.com/coins/images/31967/small/tia.jpg?1696530772",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -306,6 +339,7 @@
   "chainlink": {
     "name": "Chainlink",
     "symbol": "link",
+    "icon": "https://coin-images.coingecko.com/coins/images/877/small/chainlink-new-logo.png?1696502009",
     "detail_platforms": {
       "arbitrum-one": {
         "decimal_place": 18,
@@ -342,6 +376,10 @@
       "huobi-token": {
         "decimal_place": 18,
         "contract_address": "0x9e004545c59d359f6b7bfb06a26390b087717b42"
+      },
+      "hydration": {
+        "decimal_place": 18,
+        "contract_address": "asset_registry%2F1000794"
       },
       "milkomeda-cardano": {
         "decimal_place": 18,
@@ -380,6 +418,7 @@
   "coinbase-wrapped-btc": {
     "name": "Coinbase Wrapped BTC",
     "symbol": "cbbtc",
+    "icon": "https://coin-images.coingecko.com/coins/images/40143/small/cbbtc.webp?1726136727",
     "detail_platforms": {
       "arbitrum-one": {
         "decimal_place": 8,
@@ -402,6 +441,7 @@
   "cosmos": {
     "name": "Cosmos Hub",
     "symbol": "atom",
+    "icon": "https://coin-images.coingecko.com/coins/images/1481/small/cosmos_hub.png?1696502525",
     "detail_platforms": {
       "archway": {
         "decimal_place": 6,
@@ -427,6 +467,10 @@
         "decimal_place": 6,
         "contract_address": "0x15932e26f5bd4923d46a2b205191c4b5d5f43fe3"
       },
+      "mantra": {
+        "decimal_place": 6,
+        "contract_address": "ibc/A4DB47A9D3CF9A068D454513891B526702455D3EF08FB9EB558C561F9DC2B701"
+      },
       "osmosis": {
         "decimal_place": 6,
         "contract_address": "ibc/27394FB092D2ECCD56123C74F36E4C1F926001CEADA9CA97EA622B25F41E5EB2"
@@ -436,6 +480,7 @@
   "crypto-com-chain": {
     "name": "Cronos",
     "symbol": "cro",
+    "icon": "https://coin-images.coingecko.com/coins/images/7310/small/cro_token_logo.png?1696507599",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 8,
@@ -443,47 +488,10 @@
       }
     }
   },
-  "curve-dao-token": {
-    "name": "Curve DAO",
-    "symbol": "crv",
-    "detail_platforms": {
-      "arbitrum-one": {
-        "decimal_place": 18,
-        "contract_address": "0x11cdb42b0eb46d95f990bedd4695a6e3fa034978"
-      },
-      "base": {
-        "decimal_place": 18,
-        "contract_address": "0x8ee73c484a26e0a5df2ee2a4960b789967dd0415"
-      },
-      "energi": {
-        "decimal_place": 18,
-        "contract_address": "0xd3319eaf3c4743ac75aace77befcfa445ed6e69e"
-      },
-      "ethereum": {
-        "decimal_place": 18,
-        "contract_address": "0xd533a949740bb3306d119cc777fa900ba034cd52"
-      },
-      "fantom": {
-        "decimal_place": 18,
-        "contract_address": "0x1e4f97b9f9f913c46f1632781732927b9019c68b"
-      },
-      "optimistic-ethereum": {
-        "decimal_place": 18,
-        "contract_address": "0x0994206dfe8de6ec6920ff4d779b0d950605fb53"
-      },
-      "polygon-pos": {
-        "decimal_place": 18,
-        "contract_address": "0x172370d5cd63279efa6d502dab29171933a610af"
-      },
-      "sora": {
-        "decimal_place": 18,
-        "contract_address": "0x002ead91a2de57b8855b53d4a62c25277073fd7f65f7e5e79f4936ed747fcad0"
-      }
-    }
-  },
   "dai": {
     "name": "Dai",
     "symbol": "dai",
+    "icon": "https://coin-images.coingecko.com/coins/images/9956/small/Badge_Dai.png?1696509996",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -494,26 +502,7 @@
   "dogecoin": {
     "name": "Dogecoin",
     "symbol": "doge",
-    "detail_platforms": {
-      "": {
-        "decimal_place": 0,
-        "contract_address": ""
-      }
-    }
-  },
-  "dogwifcoin": {
-    "name": "dogwifhat",
-    "symbol": "wif",
-    "detail_platforms": {
-      "solana": {
-        "decimal_place": 6,
-        "contract_address": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"
-      }
-    }
-  },
-  "eos": {
-    "name": "EOS",
-    "symbol": "eos",
+    "icon": "https://coin-images.coingecko.com/coins/images/5/small/dogecoin.png?1696501409",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -524,6 +513,7 @@
   "ethena": {
     "name": "Ethena",
     "symbol": "ena",
+    "icon": "https://coin-images.coingecko.com/coins/images/36530/small/ethena.png?1711701436",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -534,6 +524,7 @@
   "ethena-staked-usde": {
     "name": "Ethena Staked USDe",
     "symbol": "susde",
+    "icon": "https://coin-images.coingecko.com/coins/images/33669/small/sUSDe-Symbol-Color.png?1716307680",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -544,7 +535,12 @@
   "ethena-usde": {
     "name": "Ethena USDe",
     "symbol": "usde",
+    "icon": "https://coin-images.coingecko.com/coins/images/33613/small/usde.png?1733810059",
     "detail_platforms": {
+      "aptos": {
+        "decimal_place": 6,
+        "contract_address": "0xf37a8864fe737eb8ec2c2931047047cbaed1beed3fb0e5b7c5526dafd3b9c2e9"
+      },
       "ethereum": {
         "decimal_place": 18,
         "contract_address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3"
@@ -552,12 +548,25 @@
       "solana": {
         "decimal_place": 9,
         "contract_address": "DEkqHyPN7GMRJ5cArtQFAWefqbZb33Hyf6s5iCwjEonT"
+      },
+      "the-open-network": {
+        "decimal_place": 6,
+        "contract_address": "EQAIb6KmdfdDR7CN1GBqVJuP25iCnLKCvBlJ07Evuu2dzP5f"
+      },
+      "zircuit": {
+        "decimal_place": 18,
+        "contract_address": "0x5d3a1ff2b6bab83b63cd9ad0787074081a52ef34"
+      },
+      "zksync": {
+        "decimal_place": 18,
+        "contract_address": "0x39fe7a0dacce31bd90418e3e659fb0b5f0b3db0d"
       }
     }
   },
   "ethereum": {
     "name": "Ethereum",
     "symbol": "eth",
+    "icon": "https://coin-images.coingecko.com/coins/images/279/small/ethereum.png?1696501628",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -568,6 +577,7 @@
   "ethereum-classic": {
     "name": "Ethereum Classic",
     "symbol": "etc",
+    "icon": "https://coin-images.coingecko.com/coins/images/453/small/ethereum-classic-logo.png?1696501717",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -578,6 +588,7 @@
   "fartcoin": {
     "name": "Fartcoin",
     "symbol": "fartcoin",
+    "icon": "https://coin-images.coingecko.com/coins/images/50891/small/fart.jpg?1729503972",
     "detail_platforms": {
       "solana": {
         "decimal_place": 6,
@@ -588,6 +599,7 @@
   "fasttoken": {
     "name": "Fasttoken",
     "symbol": "ftn",
+    "icon": "https://coin-images.coingecko.com/coins/images/28478/small/lightenicon_200x200.png?1696527472",
     "detail_platforms": {
       "arbitrum-one": {
         "decimal_place": 18,
@@ -610,6 +622,7 @@
   "fetch-ai": {
     "name": "Artificial Superintelligence Alliance",
     "symbol": "fet",
+    "icon": "https://coin-images.coingecko.com/coins/images/5681/small/ASI.png?1719827289",
     "detail_platforms": {
       "binance-smart-chain": {
         "decimal_place": 18,
@@ -628,6 +641,7 @@
   "filecoin": {
     "name": "Filecoin",
     "symbol": "fil",
+    "icon": "https://coin-images.coingecko.com/coins/images/12817/small/filecoin.png?1696512609",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -638,7 +652,12 @@
   "first-digital-usd": {
     "name": "First Digital USD",
     "symbol": "fdusd",
+    "icon": "https://coin-images.coingecko.com/coins/images/31079/small/FDUSD_icon_black.png?1731097953",
     "detail_platforms": {
+      "arbitrum-one": {
+        "decimal_place": 18,
+        "contract_address": "0x93c9932e4afa59201f0b5e63f7d816516f1669fe"
+      },
       "binance-smart-chain": {
         "decimal_place": 18,
         "contract_address": "0xc5f0f7b66764f6ec8c8dff7ba683102295e16409"
@@ -660,6 +679,7 @@
   "flare-networks": {
     "name": "Flare",
     "symbol": "flr",
+    "icon": "https://coin-images.coingecko.com/coins/images/28624/small/FLR-icon200x200.png?1696527609",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -670,6 +690,7 @@
   "gatechain-token": {
     "name": "Gate",
     "symbol": "gt",
+    "icon": "https://coin-images.coingecko.com/coins/images/8183/small/200X200.png?1735246724",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -680,6 +701,7 @@
   "hedera-hashgraph": {
     "name": "Hedera",
     "symbol": "hbar",
+    "icon": "https://coin-images.coingecko.com/coins/images/3688/small/hbar.png?1696504364",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -690,6 +712,7 @@
   "hyperliquid": {
     "name": "Hyperliquid",
     "symbol": "hype",
+    "icon": "https://coin-images.coingecko.com/coins/images/50882/small/hyperliquid.jpg?1729431300",
     "detail_platforms": {
       "hyperliquid": {
         "decimal_place": 18,
@@ -697,19 +720,10 @@
       }
     }
   },
-  "immutable-x": {
-    "name": "Immutable",
-    "symbol": "imx",
-    "detail_platforms": {
-      "ethereum": {
-        "decimal_place": 18,
-        "contract_address": "0xf57e7e7c23978c3caec3c3548e3d615c346e79ff"
-      }
-    }
-  },
   "injective-protocol": {
     "name": "Injective",
     "symbol": "inj",
+    "icon": "https://coin-images.coingecko.com/coins/images/12882/small/Other_200x200.png?1738782212",
     "detail_platforms": {
       "binance-smart-chain": {
         "decimal_place": 18,
@@ -736,6 +750,7 @@
   "internet-computer": {
     "name": "Internet Computer",
     "symbol": "icp",
+    "icon": "https://coin-images.coingecko.com/coins/images/14495/small/Internet_Computer_logo.png?1696514180",
     "detail_platforms": {
       "internet-computer": {
         "decimal_place": 8,
@@ -746,6 +761,7 @@
   "jito-staked-sol": {
     "name": "Jito Staked SOL",
     "symbol": "jitosol",
+    "icon": "https://coin-images.coingecko.com/coins/images/28046/small/JitoSOL-200.png?1696527060",
     "detail_platforms": {
       "neon-evm": {
         "decimal_place": 9,
@@ -760,6 +776,7 @@
   "jupiter-exchange-solana": {
     "name": "Jupiter",
     "symbol": "jup",
+    "icon": "https://coin-images.coingecko.com/coins/images/34188/small/jup.png?1704266489",
     "detail_platforms": {
       "solana": {
         "decimal_place": 6,
@@ -770,6 +787,7 @@
   "jupiter-perpetuals-liquidity-provider-token": {
     "name": "Jupiter Perpetuals Liquidity Provider Token",
     "symbol": "jlp",
+    "icon": "https://coin-images.coingecko.com/coins/images/33094/small/jlp.png?1700631386",
     "detail_platforms": {
       "solana": {
         "decimal_place": 6,
@@ -777,9 +795,21 @@
       }
     }
   },
+  "kaia": {
+    "name": "Kaia",
+    "symbol": "kaia",
+    "icon": "https://coin-images.coingecko.com/coins/images/39901/small/KAIA.png?1724734368",
+    "detail_platforms": {
+      "": {
+        "decimal_place": 0,
+        "contract_address": ""
+      }
+    }
+  },
   "kaspa": {
     "name": "Kaspa",
     "symbol": "kas",
+    "icon": "https://coin-images.coingecko.com/coins/images/25751/small/kaspa-icon-exchanges.png?1696524837",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -790,6 +820,7 @@
   "kelp-dao-restaked-eth": {
     "name": "Kelp DAO Restaked ETH",
     "symbol": "rseth",
+    "icon": "https://coin-images.coingecko.com/coins/images/33800/small/Icon___Dark.png?1702991855",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -800,6 +831,7 @@
   "kucoin-shares": {
     "name": "KuCoin",
     "symbol": "kcs",
+    "icon": "https://coin-images.coingecko.com/coins/images/1047/small/sa9z79.png?1696502152",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -810,6 +842,7 @@
   "leo-token": {
     "name": "LEO Token",
     "symbol": "leo",
+    "icon": "https://coin-images.coingecko.com/coins/images/8418/small/leo-token.png?1696508607",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -824,6 +857,7 @@
   "litecoin": {
     "name": "Litecoin",
     "symbol": "ltc",
+    "icon": "https://coin-images.coingecko.com/coins/images/2/small/litecoin.png?1696501400",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -834,6 +868,7 @@
   "lombard-staked-btc": {
     "name": "Lombard Staked BTC",
     "symbol": "lbtc",
+    "icon": "https://coin-images.coingecko.com/coins/images/39969/small/LBTC_Logo.png?1724959872",
     "detail_platforms": {
       "base": {
         "decimal_place": 8,
@@ -869,35 +904,10 @@
       }
     }
   },
-  "maker": {
-    "name": "Maker",
-    "symbol": "mkr",
-    "detail_platforms": {
-      "avalanche": {
-        "decimal_place": 18,
-        "contract_address": "0x88128fd4b259552a9a1d457f435a6527aab72d42"
-      },
-      "energi": {
-        "decimal_place": 18,
-        "contract_address": "0x050317d93f29d1ba5ff3eac3b8157fd4e345588d"
-      },
-      "ethereum": {
-        "decimal_place": 18,
-        "contract_address": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2"
-      },
-      "polygon-pos": {
-        "decimal_place": 18,
-        "contract_address": "0x6f7c932e7684666c9fd1d44527765433e01ff61d"
-      },
-      "sora": {
-        "decimal_place": 18,
-        "contract_address": "0x00ec184ef0b4bd955db05eea5a8489ae72888ab6e63682a15beca1cd39344c8f"
-      }
-    }
-  },
   "mantle": {
     "name": "Mantle",
     "symbol": "mnt",
+    "icon": "https://coin-images.coingecko.com/coins/images/30980/small/Mantle-Logo-mark.png?1739213200",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -912,6 +922,7 @@
   "mantle-staked-ether": {
     "name": "Mantle Staked Ether",
     "symbol": "meth",
+    "icon": "https://coin-images.coingecko.com/coins/images/33345/small/symbol_transparent_bg.png?1701697066",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -926,6 +937,7 @@
   "monero": {
     "name": "Monero",
     "symbol": "xmr",
+    "icon": "https://coin-images.coingecko.com/coins/images/69/small/monero_logo.png?1696501460",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -936,6 +948,7 @@
   "near": {
     "name": "NEAR Protocol",
     "symbol": "near",
+    "icon": "https://coin-images.coingecko.com/coins/images/10365/small/near.jpg?1696510367",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -950,6 +963,7 @@
   "nexo": {
     "name": "NEXO",
     "symbol": "nexo",
+    "icon": "https://coin-images.coingecko.com/coins/images/3695/small/CG-nexo-token-200x200_2x.png?1730414360",
     "detail_platforms": {
       "energi": {
         "decimal_place": 18,
@@ -976,6 +990,7 @@
   "official-trump": {
     "name": "Official Trump",
     "symbol": "trump",
+    "icon": "https://coin-images.coingecko.com/coins/images/53746/small/trump.png?1737171561",
     "detail_platforms": {
       "solana": {
         "decimal_place": 6,
@@ -986,6 +1001,7 @@
   "okb": {
     "name": "OKB",
     "symbol": "okb",
+    "icon": "https://coin-images.coingecko.com/coins/images/4463/small/WeChat_Image_20220118095654.png?1696505053",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -1004,6 +1020,7 @@
   "ondo-finance": {
     "name": "Ondo",
     "symbol": "ondo",
+    "icon": "https://coin-images.coingecko.com/coins/images/26580/small/ONDO.png?1696525656",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -1014,6 +1031,7 @@
   "optimism": {
     "name": "Optimism",
     "symbol": "op",
+    "icon": "https://coin-images.coingecko.com/coins/images/25244/small/Optimism.png?1696524385",
     "detail_platforms": {
       "optimistic-ethereum": {
         "decimal_place": 18,
@@ -1021,9 +1039,25 @@
       }
     }
   },
+  "paypal-usd": {
+    "name": "PayPal USD",
+    "symbol": "pyusd",
+    "icon": "https://coin-images.coingecko.com/coins/images/31212/small/PYUSD_Logo_%282%29.png?1696530039",
+    "detail_platforms": {
+      "ethereum": {
+        "decimal_place": 6,
+        "contract_address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8"
+      },
+      "solana": {
+        "decimal_place": 6,
+        "contract_address": "2b1kV6DkPAnxd5ixfnxCpjxmKwqjjaYmCZfHsFu24GXo"
+      }
+    }
+  },
   "pepe": {
     "name": "Pepe",
     "symbol": "pepe",
+    "icon": "https://coin-images.coingecko.com/coins/images/29850/small/pepe-token.jpeg?1696528776",
     "detail_platforms": {
       "arbitrum-one": {
         "decimal_place": 18,
@@ -1042,6 +1076,7 @@
   "pi-network": {
     "name": "Pi Network",
     "symbol": "pi",
+    "icon": "https://coin-images.coingecko.com/coins/images/54342/small/pi_network.jpg?1739347576",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -1052,6 +1087,7 @@
   "polkadot": {
     "name": "Polkadot",
     "symbol": "dot",
+    "icon": "https://coin-images.coingecko.com/coins/images/12171/small/polkadot.png?1696512008",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -1059,9 +1095,21 @@
       }
     }
   },
+  "polygon-bridged-usdt-polygon": {
+    "name": "Polygon Bridged USDT (Polygon)",
+    "symbol": "usdt",
+    "icon": "https://coin-images.coingecko.com/coins/images/35023/small/USDT.png?1707233644",
+    "detail_platforms": {
+      "polygon-pos": {
+        "decimal_place": 6,
+        "contract_address": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f"
+      }
+    }
+  },
   "polygon-ecosystem-token": {
     "name": "POL (ex-MATIC)",
     "symbol": "pol",
+    "icon": "https://coin-images.coingecko.com/coins/images/32440/small/polygon.png?1698233684",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -1076,6 +1124,7 @@
   "quant-network": {
     "name": "Quant",
     "symbol": "qnt",
+    "icon": "https://coin-images.coingecko.com/coins/images/3370/small/5ZOu7brX_400x400.jpg?1696504070",
     "detail_platforms": {
       "energi": {
         "decimal_place": 18,
@@ -1090,6 +1139,7 @@
   "render-token": {
     "name": "Render",
     "symbol": "render",
+    "icon": "https://coin-images.coingecko.com/coins/images/11636/small/rndr.png?1696511529",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -1108,6 +1158,7 @@
   "ripple": {
     "name": "XRP",
     "symbol": "xrp",
+    "icon": "https://coin-images.coingecko.com/coins/images/44/small/xrp-symbol-white-128.png?1696501442",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -1118,6 +1169,7 @@
   "rocket-pool-eth": {
     "name": "Rocket Pool ETH",
     "symbol": "reth",
+    "icon": "https://coin-images.coingecko.com/coins/images/20764/small/reth.png?1696520159",
     "detail_platforms": {
       "arbitrum-one": {
         "decimal_place": 18,
@@ -1144,6 +1196,7 @@
   "sei-network": {
     "name": "Sei",
     "symbol": "sei",
+    "icon": "https://coin-images.coingecko.com/coins/images/28205/small/Sei_Logo_-_Transparent.png?1696527207",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -1154,6 +1207,7 @@
   "shiba-inu": {
     "name": "Shiba Inu",
     "symbol": "shib",
+    "icon": "https://coin-images.coingecko.com/coins/images/11939/small/shiba.png?1696511800",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -1161,115 +1215,66 @@
       }
     }
   },
+  "sky": {
+    "name": "Sky",
+    "symbol": "sky",
+    "icon": "https://coin-images.coingecko.com/coins/images/39925/small/sky.jpg?1724827980",
+    "detail_platforms": {
+      "ethereum": {
+        "decimal_place": 18,
+        "contract_address": "0x56072c95faa701256059aa122697b133aded9279"
+      },
+      "hydration": {
+        "decimal_place": 18,
+        "contract_address": "asset_registry%2F1000795"
+      }
+    }
+  },
   "solana": {
     "name": "Solana",
     "symbol": "sol",
+    "icon": "https://coin-images.coingecko.com/coins/images/4128/small/solana.png?1718769756",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
         "contract_address": ""
-      }
-    }
-  },
-  "solv-btc": {
-    "name": "Solv Protocol BTC",
-    "symbol": "solvbtc",
-    "detail_platforms": {
-      "arbitrum-one": {
-        "decimal_place": 18,
-        "contract_address": "0x3647c54c4c2c65bc7a2d63c0da2809b399dbbdc0"
-      },
-      "avalanche": {
-        "decimal_place": 18,
-        "contract_address": "0xbc78d84ba0c46dfe32cf2895a19939c86b81a777"
-      },
-      "base": {
-        "decimal_place": 18,
-        "contract_address": "0x3b86ad95859b6ab773f55f8d94b4b9d443ee931f"
-      },
-      "berachain": {
-        "decimal_place": 18,
-        "contract_address": "0x541fd749419ca806a8bc7da8ac23d346f2df8b77"
-      },
-      "binance-smart-chain": {
-        "decimal_place": 18,
-        "contract_address": "0x4aae823a6a0b376de6a78e74ecc5b079d38cbcf7"
-      },
-      "bob-network": {
-        "decimal_place": 18,
-        "contract_address": "0x541fd749419ca806a8bc7da8ac23d346f2df8b77"
-      },
-      "corn": {
-        "decimal_place": 18,
-        "contract_address": "0x541fd749419ca806a8bc7da8ac23d346f2df8b77"
-      },
-      "ethereum": {
-        "decimal_place": 18,
-        "contract_address": "0x7a56e1c57c7475ccf742a1832b028f0456652f97"
-      },
-      "hyperevm": {
-        "decimal_place": 18,
-        "contract_address": "0xae4efbc7736f963982aacb17efa37fcbab924cb3"
-      },
-      "ink": {
-        "decimal_place": 18,
-        "contract_address": "0xae4efbc7736f963982aacb17efa37fcbab924cb3"
-      },
-      "mantle": {
-        "decimal_place": 18,
-        "contract_address": "0xa68d25fc2af7278db4bcdcaabce31814252642a9"
-      },
-      "merlin-chain": {
-        "decimal_place": 18,
-        "contract_address": "0x41d9036454be47d3745a823c4aacd0e29cfb0f71"
-      },
-      "mode": {
-        "decimal_place": 18,
-        "contract_address": "0x541fd749419ca806a8bc7da8ac23d346f2df8b77"
-      },
-      "polygon-pos": {
-        "decimal_place": 18,
-        "contract_address": "0xae4efbc7736f963982aacb17efa37fcbab924cb3"
-      },
-      "rootstock": {
-        "decimal_place": 18,
-        "contract_address": "0x541fd749419ca806a8bc7da8ac23d346f2df8b77"
-      },
-      "sei-v2": {
-        "decimal_place": 18,
-        "contract_address": "0x541fd749419ca806a8bc7da8ac23d346f2df8b77"
-      },
-      "soneium": {
-        "decimal_place": 18,
-        "contract_address": "0x541fd749419ca806a8bc7da8ac23d346f2df8b77"
-      },
-      "sonic": {
-        "decimal_place": 18,
-        "contract_address": "0x541fd749419ca806a8bc7da8ac23d346f2df8b77"
-      },
-      "taiko": {
-        "decimal_place": 18,
-        "contract_address": "0x541fd749419ca806a8bc7da8ac23d346f2df8b77"
-      },
-      "zksync": {
-        "decimal_place": 18,
-        "contract_address": "0x74ed17608cc2b5f30a59d6af07c9ad1b1ab3a5b1"
       }
     }
   },
   "sonic-3": {
-    "name": "Sonic (prev. FTM)",
+    "name": "Sonic",
     "symbol": "s",
+    "icon": "https://coin-images.coingecko.com/coins/images/38108/small/200x200_Sonic_Logo.png?1734679256",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
         "contract_address": ""
+      }
+    }
+  },
+  "spx6900": {
+    "name": "SPX6900",
+    "symbol": "spx",
+    "icon": "https://coin-images.coingecko.com/coins/images/31401/small/centeredcoin_%281%29.png?1737048493",
+    "detail_platforms": {
+      "base": {
+        "decimal_place": 8,
+        "contract_address": "0x50da645f148798f68ef2d7db7c1cb22a6819bb2c"
+      },
+      "ethereum": {
+        "decimal_place": 8,
+        "contract_address": "0xe0f63a424a4439cbe457d80e4f4b51ad25b2c56c"
+      },
+      "solana": {
+        "decimal_place": 8,
+        "contract_address": "J3NKxxXZcnNiMjKw9hYb2K4LUxgwB6t1FtPtQVsv3KFr"
       }
     }
   },
   "staked-ether": {
     "name": "Lido Staked Ether",
     "symbol": "steth",
+    "icon": "https://coin-images.coingecko.com/coins/images/13442/small/steth_logo.png?1696513206",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -1277,19 +1282,21 @@
       }
     }
   },
-  "stellar": {
-    "name": "Stellar",
-    "symbol": "xlm",
+  "stakewise-v3-oseth": {
+    "name": "StakeWise Staked ETH",
+    "symbol": "oseth",
+    "icon": "https://coin-images.coingecko.com/coins/images/33117/small/Frame_27513839.png?1700732599",
     "detail_platforms": {
-      "": {
-        "decimal_place": 0,
-        "contract_address": ""
+      "ethereum": {
+        "decimal_place": 18,
+        "contract_address": "0xf1c9acdc66974dfb6decb12aa385b9cd01190e38"
       }
     }
   },
-  "story-2": {
-    "name": "Story",
-    "symbol": "ip",
+  "stellar": {
+    "name": "Stellar",
+    "symbol": "xlm",
+    "icon": "https://coin-images.coingecko.com/coins/images/100/small/fmpFRHHQ_400x400.jpg?1735231350",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -1300,6 +1307,7 @@
   "sui": {
     "name": "Sui",
     "symbol": "sui",
+    "icon": "https://coin-images.coingecko.com/coins/images/26375/small/sui-ocean-square.png?1727791290",
     "detail_platforms": {
       "sui": {
         "decimal_place": 9,
@@ -1310,6 +1318,7 @@
   "susds": {
     "name": "sUSDS",
     "symbol": "susds",
+    "icon": "https://coin-images.coingecko.com/coins/images/52721/small/sUSDS_Coin.png?1734086971",
     "detail_platforms": {
       "arbitrum-one": {
         "decimal_place": 18,
@@ -1328,6 +1337,7 @@
   "tether": {
     "name": "Tether",
     "symbol": "usdt",
+    "icon": "https://coin-images.coingecko.com/coins/images/325/small/Tether.png?1696501661",
     "detail_platforms": {
       "aptos": {
         "decimal_place": 6,
@@ -1371,47 +1381,10 @@
       }
     }
   },
-  "the-graph": {
-    "name": "The Graph",
-    "symbol": "grt",
-    "detail_platforms": {
-      "arbitrum-one": {
-        "decimal_place": 18,
-        "contract_address": "0x9623063377ad1b27544c965ccd7342f7ea7e88c7"
-      },
-      "avalanche": {
-        "decimal_place": 18,
-        "contract_address": "0x8a0cac13c7da965a312f08ea4229c37869e85cb9"
-      },
-      "energi": {
-        "decimal_place": 18,
-        "contract_address": "0x771513ba693d457df3678c951c448701f2eaaad5"
-      },
-      "ethereum": {
-        "decimal_place": 18,
-        "contract_address": "0xc944e90c64b2c07662a292be6244bdf05cda44a7"
-      },
-      "harmony-shard-0": {
-        "decimal_place": 18,
-        "contract_address": "0x002fa662f2e09de7c306d2bab0085ee9509488ff"
-      },
-      "near-protocol": {
-        "decimal_place": 18,
-        "contract_address": "c944e90c64b2c07662a292be6244bdf05cda44a7.factory.bridge.near"
-      },
-      "polygon-pos": {
-        "decimal_place": 18,
-        "contract_address": "0x5fe2b58c013d7601147dcdd68c143a77499f5531"
-      },
-      "sora": {
-        "decimal_place": 18,
-        "contract_address": "0x00d1fb79bbd1005a678fbf2de9256b3afe260e8eead49bb07bd3a566f9fe8355"
-      }
-    }
-  },
   "the-open-network": {
     "name": "Toncoin",
     "symbol": "ton",
+    "icon": "https://coin-images.coingecko.com/coins/images/17980/small/photo_2024-09-10_17.09.00.jpeg?1725963446",
     "detail_platforms": {
       "binance-smart-chain": {
         "decimal_place": 9,
@@ -1430,6 +1403,7 @@
   "tokenize-xchange": {
     "name": "Tokenize Xchange",
     "symbol": "tkx",
+    "icon": "https://coin-images.coingecko.com/coins/images/4984/small/TKX_-_Logo_-_RGB-15.png?1696505519",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 8,
@@ -1440,6 +1414,7 @@
   "tron": {
     "name": "TRON",
     "symbol": "trx",
+    "icon": "https://coin-images.coingecko.com/coins/images/1094/small/tron-logo.png?1696502193",
     "detail_platforms": {
       "": {
         "decimal_place": 0,
@@ -1450,6 +1425,7 @@
   "uniswap": {
     "name": "Uniswap",
     "symbol": "uni",
+    "icon": "https://coin-images.coingecko.com/coins/images/12504/small/uniswap-logo.png?1720676669",
     "detail_platforms": {
       "arbitrum-one": {
         "decimal_place": 18,
@@ -1508,6 +1484,7 @@
   "usd-coin": {
     "name": "USDC",
     "symbol": "usdc",
+    "icon": "https://coin-images.coingecko.com/coins/images/6319/small/usdc.png?1696506694",
     "detail_platforms": {
       "algorand": {
         "decimal_place": 5,
@@ -1561,6 +1538,10 @@
         "decimal_place": 6,
         "contract_address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"
       },
+      "sonic": {
+        "decimal_place": 6,
+        "contract_address": "0x29219dd400f2bf60e5a23d13be72b486d4038894"
+      },
       "stellar": {
         "decimal_place": 0,
         "contract_address": "USDC-GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN"
@@ -1577,6 +1558,14 @@
         "decimal_place": 6,
         "contract_address": "0x078d782b760474a361dda0af3839290b0ef57ad6"
       },
+      "world-chain": {
+        "decimal_place": 6,
+        "contract_address": "0x79a02482a880bce3f13e09da970dc34db4cd24d1"
+      },
+      "xrp": {
+        "decimal_place": 6,
+        "contract_address": "5553444300000000000000000000000000000000.rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE"
+      },
       "zksync": {
         "decimal_place": 6,
         "contract_address": "0x1d17cbcf0d6d143135ae902365d2e5e2a16538d4"
@@ -1586,6 +1575,7 @@
   "usd1-wlfi": {
     "name": "USD1",
     "symbol": "usd1",
+    "icon": "https://coin-images.coingecko.com/coins/images/54977/small/USD1_1000x1000_transparent.png?1749297002",
     "detail_platforms": {
       "binance-smart-chain": {
         "decimal_place": 18,
@@ -1600,6 +1590,7 @@
   "usds": {
     "name": "USDS",
     "symbol": "usds",
+    "icon": "https://coin-images.coingecko.com/coins/images/39926/small/usds.webp?1726666683",
     "detail_platforms": {
       "arbitrum-one": {
         "decimal_place": 18,
@@ -1622,6 +1613,7 @@
   "usdt0": {
     "name": "USDT0",
     "symbol": "usdt0",
+    "icon": "https://coin-images.coingecko.com/coins/images/53705/small/usdt0.jpg?1737086183",
     "detail_platforms": {
       "arbitrum-one": {
         "decimal_place": 6,
@@ -1638,6 +1630,10 @@
       "flare-network": {
         "decimal_place": 6,
         "contract_address": "0xe7cd86e13ac4309349f30b3435a9d337750fc82d"
+      },
+      "hyperevm": {
+        "decimal_place": 6,
+        "contract_address": "0xb8ce59fc3717ada4c02eadf9682a9e934f625ebb"
       },
       "ink": {
         "decimal_place": 6,
@@ -1657,9 +1653,21 @@
       }
     }
   },
+  "usdtb": {
+    "name": "USDtb",
+    "symbol": "usdtb",
+    "icon": "https://coin-images.coingecko.com/coins/images/52804/small/USDtbSmall.png?1734344946",
+    "detail_platforms": {
+      "ethereum": {
+        "decimal_place": 18,
+        "contract_address": "0xc139190f447e929f090edeb554d95abb8b18ac1c"
+      }
+    }
+  },
   "vechain": {
     "name": "VeChain",
     "symbol": "vet",
+    "icon": "https://coin-images.coingecko.com/coins/images/1167/small/VET.png?1742383283",
     "detail_platforms": {
       "vechain": {
         "decimal_place": 0,
@@ -1670,6 +1678,7 @@
   "virtual-protocol": {
     "name": "Virtuals Protocol",
     "symbol": "virtual",
+    "icon": "https://coin-images.coingecko.com/coins/images/34057/small/LOGOMARK.png?1708356054",
     "detail_platforms": {
       "base": {
         "decimal_place": 18,
@@ -1688,6 +1697,7 @@
   "weth": {
     "name": "WETH",
     "symbol": "weth",
+    "icon": "https://coin-images.coingecko.com/coins/images/2518/small/weth.png?1696503332",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -1702,6 +1712,7 @@
   "whitebit": {
     "name": "WhiteBIT Coin",
     "symbol": "wbt",
+    "icon": "https://coin-images.coingecko.com/coins/images/27045/small/wbt_token.png?1696526096",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 8,
@@ -1716,6 +1727,7 @@
   "worldcoin-wld": {
     "name": "Worldcoin",
     "symbol": "wld",
+    "icon": "https://coin-images.coingecko.com/coins/images/31069/small/worldcoin.jpeg?1696529903",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -1734,6 +1746,7 @@
   "wrapped-bitcoin": {
     "name": "Wrapped Bitcoin",
     "symbol": "wbtc",
+    "icon": "https://coin-images.coingecko.com/coins/images/7598/small/wrapped_bitcoin_wbtc.png?1696507857",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 8,
@@ -1752,6 +1765,7 @@
   "wrapped-eeth": {
     "name": "Wrapped eETH",
     "symbol": "weeth",
+    "icon": "https://coin-images.coingecko.com/coins/images/33033/small/weETH.png?1701438396",
     "detail_platforms": {
       "arbitrum-one": {
         "decimal_place": 18,
@@ -1766,6 +1780,7 @@
   "wrapped-steth": {
     "name": "Wrapped stETH",
     "symbol": "wsteth",
+    "icon": "https://coin-images.coingecko.com/coins/images/18834/small/wstETH.png?1696518295",
     "detail_platforms": {
       "ethereum": {
         "decimal_place": 18,
@@ -1780,6 +1795,7 @@
   "xdce-crowd-sale": {
     "name": "XDC Network",
     "symbol": "xdc",
+    "icon": "https://coin-images.coingecko.com/coins/images/2912/small/xdc-icon.png?1696503661",
     "detail_platforms": {
       "": {
         "decimal_place": 0,

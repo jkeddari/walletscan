@@ -21,7 +21,7 @@ func ValidAddress(address string) bool {
 	return addr.IsForNet(&chaincfg.MainNetParams)
 }
 
-func Scan(address string, bitcoinPrice float64) (*types.WalletData, error) {
+func Scan(address, iconURL string, bitcoinPrice float64) (*types.WalletData, error) {
 	if !ValidAddress(address) {
 		return nil, errors.New("bad address")
 	}
@@ -57,6 +57,7 @@ func Scan(address string, bitcoinPrice float64) (*types.WalletData, error) {
 				Name:        "Bitcoin",
 				Price:       bitcoinPrice,
 				TotalAmount: amount,
+				IconURL:     iconURL,
 			},
 		},
 	}, nil

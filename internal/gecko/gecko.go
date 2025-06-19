@@ -174,6 +174,9 @@ func getCoinWithPlatforms(apiKey, id string) (*Coin, error) {
 		Name       string                     `json:"name"`
 		Symbol     string                     `json:"symbol"`
 		Plateforms map[string]PlatformDetails `json:"detail_platforms"`
+		Image      struct {
+			Small string `json:"small"`
+		} `json:"image"`
 	}
 	if err := json.NewDecoder(resp.Body).Decode(&data); err != nil {
 		return nil, err
@@ -183,5 +186,6 @@ func getCoinWithPlatforms(apiKey, id string) (*Coin, error) {
 		Name:       data.Name,
 		Symbol:     data.Symbol,
 		Plateforms: data.Plateforms,
+		Icon:       data.Image.Small,
 	}, nil
 }
