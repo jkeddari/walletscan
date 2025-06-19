@@ -9,12 +9,21 @@ type PlatformDetails struct {
 type Coin struct {
 	Name       string                     `json:"name"`
 	Symbol     string                     `json:"symbol"`
+	Icon       string                     `json:"icon"`
 	Plateforms map[string]PlatformDetails `json:"detail_platforms"`
 }
 
 type CoinsDetails struct {
 	IDs   []string
 	Coins map[string]*Coin
+}
+
+func (c *CoinsDetails) Icon(id string) string {
+	if coin, ok := c.Coins[id]; ok {
+		return coin.Icon
+	}
+
+	return "unknown"
 }
 
 func (c *CoinsDetails) Name(id string) string {

@@ -41,9 +41,8 @@ func Scan(address string, tokenDetails *gecko.CoinsDetails, prices gecko.Prices)
 	}
 	solBalance := float64(balanceResp.Value) / float64(solana.LAMPORTS_PER_SOL)
 
-	result.Add("solana", "solana", "SOL", "Solana", solBalance, prices.PriceByID("solana"))
+	result.Add("solana", "solana", "SOL", "Solana", tokenDetails.Icon("solana"), solBalance, prices.PriceByID("solana"))
 
-	// ✅ Token accounts (jsonParsed)
 	tokenAccountsResp, err := client.GetTokenAccountsByOwner(
 		context.Background(),
 		pubKey,
@@ -64,8 +63,8 @@ func Scan(address string, tokenDetails *gecko.CoinsDetails, prices gecko.Prices)
 				Info struct {
 					Mint        string `json:"mint"`
 					TokenAmount struct {
-						Amount   string `json:"amount"`   // string entier
-						Decimals uint8  `json:"decimals"` // nombre de décimales
+						Amount   string `json:"amount"`
+						Decimals uint8  `json:"decimals"`
 					} `json:"tokenAmount"`
 				} `json:"info"`
 			} `json:"parsed"`
@@ -90,6 +89,7 @@ func Scan(address string, tokenDetails *gecko.CoinsDetails, prices gecko.Prices)
 				"solana",
 				tokenInfo.Symbol,
 				tokenInfo.Name,
+				tokenInfo.Icon,
 				amountFloat,
 				prices.PriceByID(tokenID),
 			)

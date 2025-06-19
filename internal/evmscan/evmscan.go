@@ -96,6 +96,7 @@ func (c *scanContext) networkScan(network *networkInfo) error {
 		network.Network,
 		c.coinsDetails.Symbol(network.SymbolID),
 		c.coinsDetails.Name(network.SymbolID),
+		c.coinsDetails.Icon(network.SymbolID),
 		weiToEther(weiAmount),
 		c.prices.PriceByID(network.SymbolID),
 	)
@@ -127,6 +128,7 @@ func (c *scanContext) networkScan(network *networkInfo) error {
 				network.Network,
 				c.coinsDetails.Symbol(id),
 				c.coinsDetails.Name(id),
+				c.coinsDetails.Icon(id),
 				amount,
 				c.prices.PriceByID(id),
 			)

@@ -25,7 +25,7 @@ func Scan(address string, coinsDetails *gecko.CoinsDetails, prices gecko.Prices)
 	case types.EVMAddress:
 		return evmscan.Scan(address, coinsDetails, prices)
 	case types.BitcoinAddress:
-		return bitcoin.Scan(address, prices.PriceByID("bitcoin"))
+		return bitcoin.Scan(address, coinsDetails.Icon("bitcoin"), prices.PriceByID("bitcoin"))
 	case types.SolanaAddress:
 		return solana.Scan(address, coinsDetails, prices)
 	case types.TronAddress:

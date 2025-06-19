@@ -40,9 +40,12 @@ type Balance struct {
 
 	// Expanded
 	Expanded bool
+
+	// IconURL defines the url of the token icon.
+	IconURL string
 }
 
-func NewBalance(id, network, symbol, name string, amount, price float64) *Balance {
+func NewBalance(id, network, symbol, name, icon string, amount, price float64) *Balance {
 	return &Balance{
 		TokenID: id,
 		Amount: map[string]float64{
@@ -52,6 +55,7 @@ func NewBalance(id, network, symbol, name string, amount, price float64) *Balanc
 		Name:        name,
 		Price:       price,
 		TotalAmount: amount,
+		IconURL:     icon,
 	}
 }
 
@@ -152,7 +156,7 @@ func (w *WalletData) SortedBalances(sortKey string, asc bool) []*Balance {
 	return balances
 }
 
-func (w *WalletData) Add(id, network, symbol, name string, amount, price float64) {
+func (w *WalletData) Add(id, network, symbol, name, icon string, amount, price float64) {
 	if amount == 0 || amount*price < 0.1 {
 		return
 	}
@@ -164,7 +168,7 @@ func (w *WalletData) Add(id, network, symbol, name string, amount, price float64
 
 	w.TotalValue += amount * price
 	if w.Balances[id] == nil {
-		w.Balances[id] = NewBalance(id, network, symbol, name, amount, price)
+		w.Balances[id] = NewBalance(id, network, symbol, name, icon, amount, price)
 		return
 	}
 

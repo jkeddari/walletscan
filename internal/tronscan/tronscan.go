@@ -91,7 +91,7 @@ func Scan(address string) (*types.WalletData, error) {
 		if err != nil {
 			return nil, err
 		}
-		result.Add(token.TokenID, "tron", token.TokenAbbr, token.TokenName, balance, token.TokenPriceInUsd)
+		result.Add(token.TokenID, "tron", token.TokenAbbr, token.TokenName, token.TokenLogo, balance, token.TokenPriceInUsd)
 	}
 
 	return result, nil
