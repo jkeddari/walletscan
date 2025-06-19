@@ -6,6 +6,8 @@ import (
 	"log/slog"
 	"math/big"
 	"strings"
+	"sync"
+	"time"
 
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi"
@@ -14,6 +16,8 @@ import (
 	"github.com/jkeddari/walletscan/internal/gecko"
 	"github.com/jkeddari/walletscan/internal/types"
 )
+
+const maxRetries = 3
 
 var logger = slog.Default()
 
@@ -50,24 +54,32 @@ func Scan(address string, coinsDetails *gecko.CoinsDetails, prices gecko.Prices)
 		walletData:   types.NewWalletData(),
 	}
 
+	var wg sync.WaitGroup
 	for _, network := range networks {
-		logger.Debug("scanning network", "network", network)
-		if err := ctx.networkScan(network); err != nil {
-			logger.Error("scan network failed", "network", network.Network)
-		}
+		wg.Add(1)
+		go func(n *networkInfo) {
+			defer wg.Done()
 
+			logger.Debug("scanning network", "network", n)
+			if err := ctx.networkScan(n); err != nil {
+				logger.Error("scan network failed", "network", n.Network, "err", err)
+			}
+			logger.Debug("scanning network done", "network", n)
+		}(network)
 	}
 
+	wg.Wait()
 	return ctx.walletData, nil
 }
 
 func (c *scanContext) networkScan(network *networkInfo) error {
-	client, err := ethclient.Dial(network.URL)
+	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+	defer cancel()
+
+	client, err := ethclient.DialContext(ctx, network.URL)
 	if err != nil {
 		return err
 	}
-
-	ctx := context.Background()
 
 	block, err := client.BlockNumber(ctx)
 	if err != nil {
@@ -89,11 +101,27 @@ func (c *scanContext) networkScan(network *networkInfo) error {
 	)
 
 	for id, coin := range c.coinsDetails.Coins {
+		time.Sleep(5 * time.Millisecond)
+
 		if coinDetails, ok := coin.Plateforms[network.Network]; ok {
-			amount, err := c.balanceOf(client, coinDetails)
-			if err != nil {
-				logger.Error("token scan failed", "network", network.Network, "id", id)
+			var amount float64
+			var err error
+
+			for attempt := 1; attempt <= maxRetries; attempt++ {
+				amount, err = c.balanceOf(client, coinDetails)
+				if err == nil {
+					break
+				}
+
+				logger.Warn("balanceOf retry failed", "attempt", attempt, "network", network.Network, "id", id, "error", err)
+				time.Sleep(time.Duration(100*attempt) * time.Millisecond)
 			}
+
+			if err != nil {
+				logger.Error("token scan failed", "network", network.Network, "id", id, "error", err)
+				continue
+			}
+
 			c.walletData.Add(
 				id,
 				network.Network,
@@ -116,7 +144,11 @@ func (c *scanContext) balanceOf(client *ethclient.Client, tokenDetail gecko.Plat
 		return 0, err
 	}
 	msg := ethereum.CallMsg{To: &contract, Data: data}
-	result, err := client.CallContract(context.Background(), msg, nil)
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+
+	result, err := client.CallContract(ctx, msg, nil)
 	if err != nil {
 		return 0, err
 	}
