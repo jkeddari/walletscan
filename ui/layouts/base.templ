@@ -1,8 +1,8 @@
 package layouts
 
 import (
-	"github.com/jkeddari/walletscan/ui/modules"
 	"github.com/jkeddari/walletscan/ui/components/input"
+	"github.com/jkeddari/walletscan/ui/modules"
 )
 
 templ ThemeSwitcherScript() {
@@ -43,6 +43,7 @@ templ BaseLayout() {
 			@ThemeSwitcherScript()
 			<title>WalletScan</title>
 			<link href="/assets/css/output.css" rel="stylesheet"/>
+			<link href="/assets/favicon.ico" rel="icon" type="image/x-icon"/>
 			<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 			<script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
 			<script async src="https://www.googletagmanager.com/gtag/js?id=G-DHT46C8XLJ"></script>
