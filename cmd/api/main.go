@@ -53,7 +53,7 @@ func main() {
 	mux := http.NewServeMux()
 	setupAssetsRoutes(mux)
 	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		logger.Info("landing_page")
+		logger.Info("new connection", "address", r.RemoteAddr)
 		pages.Landing().Render(context.Background(), w)
 	})
 
@@ -65,12 +65,15 @@ func main() {
 			return
 		}
 
-		if walletscan.IsAddress(address) == types.UnknownAddress {
-			logger.Info("bad address", "address", address)
+		addressType := walletscan.IsAddress(address)
+		if addressType == types.UnknownAddress {
+			logger.Error("bad address", "address", address)
 			w.WriteHeader(http.StatusOK)
 			modules.ScanForm(address, true).Render(r.Context(), w)
 			return
 		}
+
+		logger.Info("scan address", "type", addressType.String(), "address", address)
 
 		// HTMX redirection
 		w.Header().Set("HX-Redirect", "/scan/"+address)
@@ -99,11 +102,11 @@ func main() {
 
 		data, err := walletscan.Scan(address, coinsInfo, prices)
 		if err != nil {
+			logger.Error("scan error", "error", err)
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 
-		logger.Info("scan_address", "type", walletscan.IsAddress(address).String())
 		pages.Scan(address, data, sortKey, asc).Render(context.Background(), w)
 	})
 
