@@ -1,8 +1,8 @@
 package pages
 
 import (
-	"github.com/jkeddari/walletscan/ui/layouts"
 	"github.com/jkeddari/walletscan/ui/components/card"
+	"github.com/jkeddari/walletscan/ui/layouts"
 )
 
 var networksStyleList = map[string]string{
@@ -55,7 +55,7 @@ templ About() {
 							<li>Get a comprehensive overview of your portfolio</li>
 						</ul>
 						<p>
-							Currently, we support the top 100 tokens across all major networks, 
+							Currently, we support the top 500 tokens across all major networks, 
 							with plans to expand our coverage in the future.
 						</p>
 					}
@@ -77,27 +77,6 @@ templ About() {
 					}
 				}
 			</div>
-			// <div class="flex justify-center">
-			// 	<div class="w-full md:w-2/3 lg:w-1/2">
-			// 		@card.Card() {
-			// 			@card.Header() {
-			// 				@card.Title() {
-			// 					Get Involved
-			// 				}
-			// 			}
-			// 			@card.Content(card.ContentProps{
-			// 				Class: "space-y-4",
-			// 			}) {
-			// 				<p>
-			// 					WalletScan is open to community feedback and contributions. Join our Discord, follow us on Twitter, or contribute to the GitHub repo to help shape the future of wallet analytics.
-			// 				</p>
-			// 				<p>
-			// 					Together, we can make blockchain transparency even more powerful.
-			// 				</p>
-			// 			}
-			// 		}
-			// 	</div>
-			// </div>
 		</main>
 	}
 }
