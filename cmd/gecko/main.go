@@ -19,7 +19,7 @@ func main() {
 		log.Fatal("missing coingecko api key")
 	}
 
-	err = gecko.FetchCoins(coinGeckoAPIKey, "./coinlist.json", 100)
+	err = gecko.FetchCoins(coinGeckoAPIKey, "./coinlist.json", 500)
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
