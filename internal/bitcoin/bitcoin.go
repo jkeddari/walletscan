@@ -3,7 +3,6 @@ package bitcoin
 import (
 	"encoding/json"
 	"errors"
-	"log"
 	"net/http"
 
 	"github.com/btcsuite/btcd/btcutil"
@@ -29,8 +28,9 @@ func Scan(address, iconURL string, bitcoinPrice float64) (*types.WalletData, err
 	url := urlBlockInfo + address
 	resp, err := http.Get(url)
 	if err != nil {
-		log.Fatal("get balance", err)
+		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var info struct {
 		Balance int `json:"final_balance"`
