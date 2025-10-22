@@ -2,6 +2,7 @@ package tronscan
 
 import (
 	"encoding/json"
+	"errors"
 	"math/big"
 	"net/http"
 	"net/url"
@@ -49,9 +50,6 @@ func convertBalance(balanceStr string, decimals int) (float64, error) {
 		return 0, strconv.ErrSyntax
 	}
 
-	divisor := new(big.Float).SetFloat64(1)
-	divisor.Quo(big.NewFloat(1), new(big.Float).SetFloat64(float64(10^decimals)))
-
 	pow := new(big.Float).SetFloat64(1)
 	for i := 0; i < decimals; i++ {
 		pow.Mul(pow, big.NewFloat(10))
@@ -66,8 +64,12 @@ func convertBalance(balanceStr string, decimals int) (float64, error) {
 }
 
 func Scan(address string) (*types.WalletData, error) {
+	if !ValidAddress(address) {
+		return nil, errors.New("bad address")
+	}
+
 	params := url.Values{}
-	params.Set("address", "TK4ykR48cQQoyFcZ5N4xZCbsBaHcg6n3gJ")
+	params.Set("address", address)
 
 	req, err := http.NewRequest("GET", tronscanURL+"?"+params.Encode(), nil)
 	if err != nil {
@@ -78,6 +80,7 @@ func Scan(address string) (*types.WalletData, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var tronWallet tronWalletResponse
 	err = json.NewDecoder(resp.Body).Decode(&tronWallet)
