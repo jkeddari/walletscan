@@ -15,42 +15,48 @@ templ ScanForm(address string, showError bool) {
 		hx-target="this"
 		hx-indicator="#spinner"
 		hx-disabled-elt="find button"
-		class="mt-8 "
+		class="w-full"
 	>
 		@form.Item(form.ItemProps{
-			Class: "flex-1 flex gap-3",
+			Class: "rounded-[1.75rem] border border-border/70 bg-background/90 p-2 shadow-[0_24px_80px_-40px_rgba(15,23,42,0.45)] backdrop-blur",
 		}) {
-			<div class="flex-1">
-				@input.Input(input.Props{
-					Class:       "flex",
-					Type:        input.TypeText,
-					Name:        "address",
-					Placeholder: "Enter wallet address",
-					Value:       address,
-					Required:    true,
-					HasError:    showError,
-				})
-				if showError {
-					@form.Message(form.MessageProps{
-						Class:      "flex",
-						Attributes: templ.Attributes{"hx-on:htmx:responseError": "open = !open"},
-						Variant:    form.MessageVariantError,
+			<div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+				<div class="min-w-0 flex-1">
+					@form.Description(form.DescriptionProps{
+						Class: "px-4 pt-2 text-left text-[0.7rem] font-medium uppercase tracking-[0.28em]",
 					}) {
-						Invalid wallet address. Please check and try again.
+						Wallet address
 					}
+					@input.Input(input.Props{
+						Class:       "h-14 border-0 bg-transparent px-4 text-base shadow-none focus-visible:ring-0 focus-visible:ring-offset-0",
+						Type:        input.TypeText,
+						Name:        "address",
+						Placeholder: "Paste a Bitcoin, Ethereum, Solana or Tron address",
+						Value:       address,
+						Required:    true,
+						HasError:    showError,
+					})
+				</div>
+				@button.Button(button.Props{
+					Type:  button.TypeSubmit,
+					Class: "h-14 rounded-2xl px-5 text-sm font-semibold sm:min-w-[140px]",
+				}) {
+					<span id="spinner" class="htmx-indicator hidden [&.htmx-request]:inline-flex">
+						@spinner.Spinner(spinner.Props{
+							Size:  spinner.SizeSm,
+							Color: "text-primary-foreground",
+						})
+					</span>
+					Scan wallet
 				}
 			</div>
-			@button.Button(button.Props{
-				Type:  button.TypeSubmit,
-				Class: "flex items-center gap-2",
-			}) {
-				<span id="spinner" class="htmx-indicator hidden [&.htmx-request]:inline-flex">
-					@spinner.Spinner(spinner.Props{
-						Size:  spinner.SizeSm,
-						Color: "text-primary-foreground",
-					})
-				</span>
-				Scan
+			if showError {
+				@form.Message(form.MessageProps{
+					Class:   "px-4 pb-2",
+					Variant: form.MessageVariantError,
+				}) {
+					Invalid wallet address. Please check it and try again.
+				}
 			}
 		}
 	</form>

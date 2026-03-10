@@ -6,15 +6,15 @@ import (
 )
 
 var networksStyleList = map[string]string{
-	"bitcoin":   "bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-100",
-	"solana":    "bg-purple-100 dark:bg-emerald-900 text-purple-800 dark:text-emerald-100",
-	"ethereum":  "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100",
-	"bsc":       "bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-100",
-	"polygon":   "bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100",
-	"base":      "bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-100",
-	"avalanche": "bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-100",
-	"arbitrum":  "bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-100",
-	"tron":      "bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100",
+	"bitcoin":   "border border-amber-500/20 bg-amber-500/10 text-amber-700 dark:text-amber-200",
+	"solana":    "border border-violet-500/20 bg-violet-500/10 text-violet-700 dark:text-violet-200",
+	"ethereum":  "border border-sky-500/20 bg-sky-500/10 text-sky-700 dark:text-sky-200",
+	"bsc":       "border border-yellow-500/20 bg-yellow-500/10 text-yellow-700 dark:text-yellow-200",
+	"polygon":   "border border-fuchsia-500/20 bg-fuchsia-500/10 text-fuchsia-700 dark:text-fuchsia-200",
+	"base":      "border border-indigo-500/20 bg-indigo-500/10 text-indigo-700 dark:text-indigo-200",
+	"avalanche": "border border-orange-500/20 bg-orange-500/10 text-orange-700 dark:text-orange-200",
+	"arbitrum":  "border border-cyan-500/20 bg-cyan-500/10 text-cyan-700 dark:text-cyan-200",
+	"tron":      "border border-rose-500/20 bg-rose-500/10 text-rose-700 dark:text-rose-200",
 }
 
 func getNetworkStyle(network string) string {
@@ -22,61 +22,87 @@ func getNetworkStyle(network string) string {
 		return style
 	}
 
-	return "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+	return "border border-border bg-muted text-foreground"
 }
 
 templ About() {
 	@layouts.BaseLayout() {
-		<main class="flex-1 container max-w-7xl mx-auto py-6 space-y-8">
-			<div class="text-center space-y-4">
-				<h1 class="text-4xl font-bold">About WalletScan</h1>
-				<p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-					A powerful tool to scan and analyze any blockchain wallet address, providing detailed insights about token holdings across multiple networks.
-				</p>
-			</div>
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-				@card.Card() {
-					@card.Header() {
-						@card.Title() {
-							Our Mission
-						}
-					}
-					@card.Content(card.ContentProps{
-						Class: "space-y-4",
+		<main class="flex-1">
+			<section class="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+				<div class="mx-auto max-w-3xl text-center">
+					<div class="inline-flex items-center rounded-full border border-border/70 bg-background/80 px-4 py-2 text-xs font-medium uppercase tracking-[0.28em] text-muted-foreground shadow-sm">
+						About the product
+					</div>
+					<h1 class="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">WalletScan keeps wallet lookup simple.</h1>
+					<p class="mt-4 text-base text-muted-foreground sm:text-lg">
+						The product is built for one job: paste a wallet address, get a readable multi-chain snapshot, and move on. No portfolio setup, no account wall, no noisy dashboard.
+					</p>
+				</div>
+				<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+					@card.Card(card.Props{
+						Class: "border-border/70 bg-card/80 shadow-sm",
 					}) {
-						<p>
-							WalletScan is designed to make blockchain wallet analysis accessible to everyone. 
-							Whether you're a crypto enthusiast, investor, or developer, our tool helps you:
-						</p>
-						<ul class="list-disc list-inside space-y-2">
-							<li>Scan any wallet address across multiple blockchains</li>
-							<li>View token balances and their current values</li>
-							<li>Track holdings across different networks</li>
-							<li>Get a comprehensive overview of your portfolio</li>
-						</ul>
-						<p>
-							Currently, we support the top 500 tokens across all major networks, 
-							with plans to expand our coverage in the future.
-						</p>
-					}
-				}
-				@card.Card() {
-					@card.Header() {
-						@card.Title() {
-							Supported Networks
-						}
-					}
-					@card.Content(card.ContentProps{
-						Class: "flex flex-wrap gap-2",
-					}) {
-						<div class="flex flex-wrap gap-2">
-							for network, style := range networksStyleList {
-								<div class={ "px-3 py-1 rounded-full " + style }>{ network }</div>
+						@card.Header() {
+							@card.Title() {
+								What WalletScan does
 							}
-						</div>
+							@card.Description() {
+								A fast way to inspect an address across supported chains.
+							}
+						}
+						@card.Content(card.ContentProps{
+							Class: "space-y-4 pt-4 text-sm text-muted-foreground sm:text-base",
+						}) {
+							<p>
+								WalletScan is designed for crypto users who want a clean answer, not a complex dashboard.
+							</p>
+							<ul class="list-disc space-y-2 pl-5">
+								<li>Detect a supported wallet type automatically</li>
+								<li>Fetch balances across multiple networks</li>
+								<li>Enrich holdings with current token prices</li>
+								<li>Show the portfolio in a compact, readable table</li>
+							</ul>
+						}
+					}
+					@card.Card(card.Props{
+						Class: "border-border/70 bg-card/80 shadow-sm",
+					}) {
+						@card.Header() {
+							@card.Title() {
+								Product principles
+							}
+							@card.Description() {
+								Minimal surface, useful output, no distraction.
+							}
+						}
+						@card.Content(card.ContentProps{
+							Class: "space-y-3 pt-4 text-sm text-muted-foreground sm:text-base",
+						}) {
+							<p>One search input is the product. Everything else supports that core flow.</p>
+							<p>That is why the interface stays lightweight, mobile-friendly, and centered on the scan result rather than on account management.</p>
+						}
+					}
+				</div>
+				@card.Card(card.Props{
+					Class: "border-border/70 bg-card/80 shadow-sm",
+				}) {
+					@card.Header() {
+						@card.Title() {
+							Supported networks
+						}
+						@card.Description() {
+							Major chains currently handled by the scanner.
+						}
+					}
+					@card.Content(card.ContentProps{
+						Class: "flex flex-wrap gap-3 pt-4",
+					}) {
+						for network, style := range networksStyleList {
+							<div class={ "rounded-full px-3 py-1.5 text-sm font-medium " + style }>{ network }</div>
+						}
 					}
 				}
-			</div>
+			</section>
 		</main>
 	}
 }

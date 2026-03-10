@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+	"path/filepath"
 
 	"github.com/a-h/templ"
 	"github.com/jkeddari/walletscan"
@@ -52,6 +53,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	setupAssetsRoutes(mux)
+	setupSEORoutes(mux)
 	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		logger.Info("new connection", "address", r.RemoteAddr)
 		pages.Landing().Render(context.Background(), w)
@@ -122,4 +124,13 @@ func setupAssetsRoutes(mux *http.ServeMux) {
 	})
 
 	mux.Handle("GET /assets/", http.StripPrefix("/assets/", assetHandler))
+}
+
+func setupSEORoutes(mux *http.ServeMux) {
+	mux.HandleFunc("GET /robots.txt", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, filepath.Clean("assets/robots.txt"))
+	})
+	mux.HandleFunc("GET /sitemap.xml", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, filepath.Clean("assets/sitemap.xml"))
+	})
 }

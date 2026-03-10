@@ -1,0 +1,60 @@
+version: "3"
+
+vars:
+  TAILWIND_CMD:
+    sh: command -v tailwindcss >/dev/null 2>&1 && echo "tailwindcss" || echo "npx @tailwindcss/cli@latest"
+
+tasks:
+  templ:
+    desc: Watch and generate templ files with browser proxy
+    cmds:
+      - go tool templ generate --watch --proxy="http://localhost:8090" --open-browser=true
+
+  server:
+    desc: Run the API server with air reload
+    cmds:
+      - |
+        air \
+          --build.cmd "go build -o tmp/bin/main ./cmd/api/main.go" \
+          --build.bin "tmp/bin/main" \
+          --build.delay "100" \
+          --build.exclude_dir "node_modules" \
+          --build.include_ext "go,templ" \
+          --build.stop_on_error "false" \
+          --misc.clean_on_exit true
+
+  tailwind:
+    desc: Watch and rebuild Tailwind CSS
+    cmds:
+      - "{{.TAILWIND_CMD}} -i ./assets/css/input.css -o ./assets/css/output.css --watch"
+
+  build-css:
+    desc: Build Tailwind CSS once
+    cmds:
+      - "{{.TAILWIND_CMD}} -i ./assets/css/input.css -o ./assets/css/output.css --clean"
+
+  build-templ:
+    desc: Generate templ files once
+    cmds:
+      - go tool templ generate
+
+  test:
+    desc: Run the Go test suite
+    cmds:
+      - go test ./...
+
+  api:
+    desc: Run the API without watchers
+    cmds:
+      - go run ./cmd/api
+
+  gecko:
+    desc: Refresh coin metadata from CoinGecko
+    cmds:
+      - go run ./cmd/gecko
+
+  dev:
+    desc: Start CSS watch, templ watch, and the air server
+    cmds:
+      - task build-css
+      - task --parallel tailwind templ server

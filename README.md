@@ -42,12 +42,12 @@ PORT=8090                  # optional – defaults to 8090
 Now launch the development stack:
 
 ```bash
-make dev
+task dev
 ```
 
-`make dev` runs three watchers in parallel:
+`task dev` runs three watchers in parallel:
 
-- `tailwind-watch` – recompiles CSS on file change.
+- `tailwind` – recompiles CSS on file change.
 - `templ` – regenerates Go code for `.templ` files.
 - `server` – rebuilds and restarts the Go API via `air`.
 
@@ -62,8 +62,8 @@ COINGECKO_APIKEY=... go run ./cmd/api
 Assets must exist before starting the server this way. If you need to (re)generate them manually, use:
 
 ```bash
-tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify
-go generate ./...
+task build-css
+task build-templ
 ```
 
 ---

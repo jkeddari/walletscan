@@ -7,18 +7,28 @@ import (
 
 templ Landing() {
 	@layouts.BaseLayout() {
-		<main class="flex-1 flex items-center justify-center">
-			<div class="w-full max-w-xl px-4">
-				<div class="text-center">
-					<h1 class="text-5xl font-bold tracking-tight">
-						WalletScan
+		<main class="flex-1">
+			<section class="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 pb-16 pt-14 sm:px-6 sm:pt-20 lg:px-8">
+				<div class="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
+					<div class="inline-flex items-center rounded-full border border-border/70 bg-background/80 px-4 py-2 text-xs font-medium uppercase tracking-[0.28em] text-muted-foreground shadow-sm">
+						Bitcoin, Ethereum, Solana, Tron
+					</div>
+					<h1 class="mt-6 max-w-3xl text-4xl font-semibold tracking-tight sm:text-6xl">
+						Scan any crypto wallet in one search.
 					</h1>
-					<p class="mt-4 text-lg text-gray-600">
-						Enter an address to scan and analyze wallet details
+					<p class="mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
+						Paste an address and get a clean overview of token balances, supported networks, and estimated value without account creation or extra clicks.
 					</p>
+					<div class="mt-8 w-full max-w-3xl">
+						@modules.ScanForm("", false)
+					</div>
+					<div class="mt-5 flex flex-wrap items-center justify-center gap-3 text-sm text-muted-foreground">
+						<span class="rounded-full border border-border/70 bg-background/70 px-3 py-1">No signup</span>
+						<span class="rounded-full border border-border/70 bg-background/70 px-3 py-1">Live price enrichment</span>
+						<span class="rounded-full border border-border/70 bg-background/70 px-3 py-1">Simple wallet overview</span>
+					</div>
 				</div>
-				@modules.ScanForm("", false)
-			</div>
+			</section>
 		</main>
 	}
 }
