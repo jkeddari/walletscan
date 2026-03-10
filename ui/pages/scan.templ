@@ -3,16 +3,16 @@ package pages
 import (
 	"strings"
 
-	"github.com/jkeddari/walletscan/ui/layouts"
-	"github.com/jkeddari/walletscan/ui/components/card"
-	"github.com/jkeddari/walletscan/ui/modules"
-	"github.com/jkeddari/walletscan/ui/components/table"
 	"github.com/jkeddari/walletscan/internal/types"
+	"github.com/jkeddari/walletscan/ui/components/button"
+	"github.com/jkeddari/walletscan/ui/components/card"
+	"github.com/jkeddari/walletscan/ui/components/icon"
+	"github.com/jkeddari/walletscan/ui/components/table"
+	"github.com/jkeddari/walletscan/ui/layouts"
+	"github.com/jkeddari/walletscan/ui/modules"
 	"golang.org/x/text/currency"
 	"golang.org/x/text/language"
 	"golang.org/x/text/message"
-	"github.com/jkeddari/walletscan/ui/components/button"
-	"github.com/jkeddari/walletscan/ui/components/icon"
 )
 
 func FormatUSD(value float64) string {
@@ -25,138 +25,185 @@ func FormatNumber(value float64) string {
 	return p.Sprintf("%.2f", value)
 }
 
-templ walletOverview(totalTokens int, totalValue float64, networks []string) {
-	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-		@card.Card() {
-			@card.Header() {
-				@card.Title() {
-					Total Value
-				}
+func FormatCount(value int) string {
+	p := message.NewPrinter(language.AmericanEnglish)
+	return p.Sprintf("%d", value)
+}
+
+templ overviewCard(title string, value string) {
+	@card.Card(card.Props{
+		Class: "border-border/70 bg-card/80 shadow-sm",
+	}) {
+		@card.Header() {
+			@card.Description(card.DescriptionProps{
+				Class: "text-xs font-medium uppercase tracking-[0.28em]",
+			}) {
+				{ title }
 			}
-			@card.Content() {
-				<p class="text-3xl font-bold">{ FormatUSD(totalValue) }</p>
+			@card.Title(card.TitleProps{
+				Class: "text-2xl sm:text-3xl",
+			}) {
+				{ value }
 			}
 		}
-		@card.Card() {
+	}
+}
+
+templ walletOverview(totalTokens int, totalValue float64, networks []string) {
+	<div class="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_1fr_1.2fr]">
+		@overviewCard("Total value", FormatUSD(totalValue))
+		@overviewCard("Tracked assets", FormatCount(totalTokens))
+		@card.Card(card.Props{
+			Class: "border-border/70 bg-card/80 shadow-sm",
+		}) {
 			@card.Header() {
-				@card.Title() {
+				@card.Description(card.DescriptionProps{
+					Class: "text-xs font-medium uppercase tracking-[0.28em]",
+				}) {
 					Networks
 				}
-			}
-			@card.Content() {
-				<div class="flex flex-wrap gap-2">
-					for _, network := range networks {
-						<div
-							key={ network }
-							class={ "px-3 py-1 rounded-full " + getNetworkStyle(network) }
-						>
-							{ network }
-						</div>
-					}
-				</div>
-			}
-		}
-		@card.Card() {
-			@card.Header() {
-				@card.Title() {
-					Total Tokens
+				@card.Title(card.TitleProps{
+					Class: "text-2xl sm:text-3xl",
+				}) {
+					{ len(networks) }
 				}
 			}
-			@card.Content() {
-				<p class="text-3xl font-bold">{ totalTokens }</p>
+			@card.Content(card.ContentProps{
+				Class: "flex flex-wrap gap-2 pt-4",
+			}) {
+				for _, network := range networks {
+					<div
+						key={ network }
+						class={ "rounded-full px-3 py-1.5 text-sm font-medium " + getNetworkStyle(network) }
+					>
+						{ network }
+					</div>
+				}
 			}
 		}
 	</div>
 }
 
-templ walletContent(data *types.WalletData) {
-	<div class="rounded-xl overflow-hidden border bg-card">
-		@table.Table() {
-			@table.Row(table.RowProps{Class: "hover:bg-transparent"}) {
-				@table.Header(table.HeaderProps{Class: "hover:bg-transparent"}) {
-					@table.Head(table.HeadProps{Class: "font-semibold w-[50px]"})
-					@table.Head(table.HeadProps{Class: "font-semibold"}) {
-						Asset
-					}
-					@table.Head(table.HeadProps{Class: "font-semibold"}) {
-						Total Amount
-					}
-					@table.Head(table.HeadProps{Class: "text-right font-semibold"}) {
-						Total Value
+templ walletContent(data *types.WalletData, sortKey string, sortAsc bool) {
+	@card.Card(card.Props{
+		Class: "overflow-hidden border-border/70 bg-card/80 shadow-sm",
+	}) {
+		@card.Header(card.HeaderProps{
+			Class: "gap-3 border-b border-border/70 pb-6",
+		}) {
+			@card.Title() {
+				Portfolio breakdown
+			}
+		}
+		@card.Content(card.ContentProps{
+			Class: "p-0",
+		}) {
+			@table.Table() {
+				@table.Header() {
+					@table.Row(table.RowProps{
+						Class: "hover:bg-transparent",
+					}) {
+						@table.Head(table.HeadProps{Class: "w-[52px]"})
+						@table.Head(table.HeadProps{Class: "px-4 py-3 font-semibold"}) {
+							Asset
+						}
+						@table.Head(table.HeadProps{Class: "px-4 py-3 font-semibold"}) {
+							Total amount
+						}
+						@table.Head(table.HeadProps{Class: "px-4 py-3 text-right font-semibold"}) {
+							Total value
+						}
 					}
 				}
-			}
-			for _, coinBalance := range data.SortedBalances("value", false) {
-				@table.Body(table.BodyProps{Attributes: templ.Attributes{"x-data": "{open:false}"}}) {
-					@table.Row(table.RowProps{
-						Class: "hover:bg-muted/50 cursor-pointer",
+				for _, coinBalance := range data.SortedBalances(sortKey, sortAsc) {
+					@table.Body(table.BodyProps{
+						Attributes: templ.Attributes{"x-data": "{open:false}"},
 					}) {
-						@table.Cell() {
-							@button.Button(button.Props{
-								Variant:    button.VariantGhost,
-								Size:       button.SizeIcon,
-								Class:      "h-6 w-6",
-								Attributes: templ.Attributes{"@click": "open = !open"},
-							}) {
-								<span x-show="!open">
-									@icon.ChevronRight(icon.Props{Class: "h-4 w-4"})
-								</span>
-								<span x-show="open">
-									@icon.ChevronDown(icon.Props{Class: "h-4 w-4"})
-								</span>
-							}
-						}
-						@table.Cell(table.CellProps{Class: "font-medium"}) {
-							<div class="flex items-center space-x-2">
-								<img
-									src={ coinBalance.IconURL }
-									alt={ coinBalance.Symbol }
-									class="w-6 h-6 rounded-full"
-								/>
-								<div class="flex flex-col">
-									<span>{ strings.ToUpper(coinBalance.Symbol) }</span>
-									<span class="text-xs text-muted-foreground">{ coinBalance.Name }</span>
-								</div>
-							</div>
-						}
-						@table.Cell() {
-							{ FormatNumber(coinBalance.TotalAmount) }
-						}
-						@table.Cell(table.CellProps{Class: "text-right"}) {
-							{ FormatUSD(coinBalance.Value()) }
-						}
-					}
-					for network, amount := range coinBalance.Amount {
 						@table.Row(table.RowProps{
-							Class:      "hover:bg-muted/50 bg-muted/30",
-							Attributes: templ.Attributes{"x-show": "open"},
+							Class: "cursor-pointer hover:bg-muted/40",
 						}) {
-							@table.Cell()
-							@table.Cell(table.CellProps{Class: "pl-4"}) {
-								<div class={ "px-3 py-1 rounded-full inline-block " + getNetworkStyle(network) }>
-									{ network }
+							@table.Cell(table.CellProps{
+								Class: "px-3",
+							}) {
+								@button.Button(button.Props{
+									Variant:    button.VariantGhost,
+									Size:       button.SizeIcon,
+									Class:      "h-8 w-8 rounded-full",
+									Attributes: templ.Attributes{"@click": "open = !open"},
+								}) {
+									<span x-show="!open">
+										@icon.ChevronRight(icon.Props{Class: "h-4 w-4"})
+									</span>
+									<span x-show="open">
+										@icon.ChevronDown(icon.Props{Class: "h-4 w-4"})
+									</span>
+								}
+							}
+							@table.Cell(table.CellProps{Class: "px-4 py-4 font-medium"}) {
+								<div class="flex items-center gap-3">
+									<img
+										src={ coinBalance.IconURL }
+										alt={ coinBalance.Symbol }
+										class="h-9 w-9 rounded-full border border-border/70 bg-background"
+									/>
+									<div class="flex min-w-0 flex-col">
+										<span class="truncate font-medium">{ strings.ToUpper(coinBalance.Symbol) }</span>
+										<span class="truncate text-xs text-muted-foreground">{ coinBalance.Name }</span>
+									</div>
 								</div>
 							}
-							@table.Cell() {
-								{ FormatNumber(amount) }
+							@table.Cell(table.CellProps{Class: "px-4 py-4"}) {
+								{ FormatNumber(coinBalance.TotalAmount) }
 							}
-							@table.Cell(table.CellProps{Class: "text-right"}) {
-								{ FormatUSD(amount * coinBalance.Price) }
+							@table.Cell(table.CellProps{Class: "px-4 py-4 text-right font-medium"}) {
+								{ FormatUSD(coinBalance.Value()) }
+							}
+						}
+						for network, amount := range coinBalance.Amount {
+							@table.Row(table.RowProps{
+								Class:      "bg-muted/20 hover:bg-muted/20",
+								Attributes: templ.Attributes{"x-show": "open"},
+							}) {
+								@table.Cell(table.CellProps{Class: "px-3"})
+								@table.Cell(table.CellProps{Class: "px-4 py-3"}) {
+									<div class={ "inline-flex rounded-full px-3 py-1.5 text-sm font-medium " + getNetworkStyle(network) }>
+										{ network }
+									</div>
+								}
+								@table.Cell(table.CellProps{Class: "px-4 py-3"}) {
+									{ FormatNumber(amount) }
+								}
+								@table.Cell(table.CellProps{Class: "px-4 py-3 text-right"}) {
+									{ FormatUSD(amount * coinBalance.Price) }
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-	</div>
+	}
 }
 
 templ Scan(address string, data *types.WalletData, sortKey string, sortAsc bool) {
 	@layouts.BaseLayout() {
-		<main class="flex-1 container max-w-7xl mx-auto py-6 space-y-8">
-			@modules.ScanForm(address, false)
-			@walletOverview(len(data.Balances), data.TotalValue, data.Networks())
-			@walletContent(data)
+		<main class="flex-1">
+			<section class="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 pb-16 pt-10 sm:px-6 lg:px-8">
+				<div class="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
+					<div class="inline-flex items-center rounded-full border border-border/70 bg-background/80 px-4 py-2 text-xs font-medium uppercase tracking-[0.28em] text-muted-foreground shadow-sm">
+						Scan result
+					</div>
+					<h1 class="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">Wallet overview</h1>
+					<div class="mt-4 max-w-3xl rounded-full border border-border/70 bg-background/80 px-4 py-2 font-mono text-xs text-muted-foreground shadow-sm break-all sm:text-sm">
+						{ address }
+					</div>
+					<div class="mt-8 w-full max-w-3xl">
+						@modules.ScanForm(address, false)
+					</div>
+				</div>
+				@walletOverview(len(data.Balances), data.TotalValue, data.Networks())
+				@walletContent(data, sortKey, sortAsc)
+			</section>
 		</main>
 	}
 }

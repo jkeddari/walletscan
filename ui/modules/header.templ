@@ -1,23 +1,31 @@
 package modules
 
 templ Header() {
-	<header class="flex items-center justify-between px-4 py-2 border-b border-accent">
-		<a href="/" class="flex items-center">
-			<h1 class="font-orbitron text-2xl bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent font-bold tracking-wider">
-				WS
-			</h1>
-		</a>
-		<div class="flex items-center gap-4">
-			<a href="/" class="text-sm text-muted-foreground hover:text-foreground">
-				Home
+	<header class="sticky top-0 z-30 border-b border-border/60 bg-background/80 backdrop-blur-xl">
+		<div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+			<a href="/" class="flex min-w-0 items-center gap-3">
+				<div class="flex h-10 w-10 items-center justify-center rounded-2xl border border-border/70 bg-card shadow-sm">
+					<span class="text-sm font-semibold tracking-tight">WS</span>
+				</div>
+				<div class="min-w-0">
+					<div class="text-sm font-semibold tracking-tight sm:text-base">WalletScan</div>
+					<div class="hidden text-xs text-muted-foreground sm:block">Simple multi-chain wallet scanner</div>
+				</div>
 			</a>
-			<a href="mailto:contact@walletscan.fi" class="text-sm text-muted-foreground hover:text-foreground">
-				Contact
-			</a>
-			<a href="/about" class="text-sm text-muted-foreground hover:text-foreground">
-				About
-			</a>
-			@ThemeSwitcher()
+			<div class="flex items-center gap-1 sm:gap-2">
+				<a href="/" class="rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
+					Home
+				</a>
+				<a href="/about" class="rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground">
+					About
+				</a>
+				<a href="mailto:contact@walletscan.fi" class="hidden rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground sm:inline-flex">
+					Contact
+				</a>
+				@ThemeSwitcher(ThemeSwitcherProps{
+					Class: "rounded-full border border-border/70 bg-background shadow-xs",
+				})
+			</div>
 		</div>
 	</header>
 }

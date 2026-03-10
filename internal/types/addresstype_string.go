@@ -12,15 +12,17 @@ func _() {
 	_ = x[EVMAddress-1]
 	_ = x[BitcoinAddress-2]
 	_ = x[SolanaAddress-3]
+	_ = x[TronAddress-4]
 }
 
-const _AddressType_name = "unknownevmbitcoinsolana"
+const _AddressType_name = "unknownevmbitcoinsolanatron"
 
-var _AddressType_index = [...]uint8{0, 7, 10, 17, 23}
+var _AddressType_index = [...]uint8{0, 7, 10, 17, 23, 27}
 
 func (i AddressType) String() string {
-	if i < 0 || i >= AddressType(len(_AddressType_index)-1) {
+	idx := int(i) - 0
+	if i < 0 || idx >= len(_AddressType_index)-1 {
 		return "AddressType(" + strconv.FormatInt(int64(i), 10) + ")"
 	}
-	return _AddressType_name[_AddressType_index[i]:_AddressType_index[i+1]]
+	return _AddressType_name[_AddressType_index[idx]:_AddressType_index[idx+1]]
 }
