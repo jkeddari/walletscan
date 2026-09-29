@@ -107,16 +107,3 @@ utils/         # Helper scripts (e.g., formatting)
 
 The entry point for the web experience is `cmd/api/main.go`, which wires the HTMX flows and static file serving. Core balance logic sits in `walletscan.Scan` and dispatches to chain-specific scanners under `internal/`.
 
----
-
-## Contributing & Next Steps
-
-- File an issue or start a discussion if you plan to add new chains or data sources.
-- Keep generated files (`*_templ.go`, `assets/css/output.css`) out of commits unless they are required for the change.
-- Run `go fmt ./...` before opening a PR. Add tests (or fixtures) alongside new chain integrations to document expected responses.
-
-Roadmap highlights (feel free to help out):
-
-- ERC-20 token balances on EVM chains
-- Additional chains (Polygon, Solana tokens, etc.)
-- Public API endpoints for programmatic integrations
